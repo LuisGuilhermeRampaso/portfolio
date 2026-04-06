@@ -17,7 +17,7 @@
 
 Portfólio pessoal construído em HTML, CSS e JavaScript puros — sem frameworks, sem dependências. Foco em performance, animações suaves e design minimalista dark.
 
-**Acesse:** [lrampazo.vercel.app](https://lrampazo.vercel.app) *(ou o link do seu deploy na Vercel)*
+**Acesse:** [luisguilhermerampaso.github.io/portfolio](https://luisguilhermerampaso.github.io/portfolio/)
 
 ---
 
@@ -72,7 +72,7 @@ npx serve .
 
 ## Deploy
 
-O portfólio está configurado para deploy automático na **Vercel** via push na branch `main`.
+O portfólio está publicado via **GitHub Pages** — qualquer push na branch `main` atualiza automaticamente em alguns minutos.
 
 ---
 
