@@ -29,7 +29,7 @@ Portfólio pessoal construído em HTML, CSS e JavaScript puros — sem framework
 | 02 | **Bíblia Online** | TypeScript · Vite · Chrome MV3 | Chrome Web Store |
 | 03 | **Calculadora CLT** | TypeScript · React · Tailwind · Vite | Em Produção |
 | 04 | **API REST Documentada** | TypeScript · Express · JWT · Swagger | Open Source |
-| 07 | **Air Canvas** | React · TypeScript · MediaPipe · Canvas API | Open Source |
+| 05 | **Air Canvas** | React · TypeScript · MediaPipe · Canvas API | [desenhe.vercel.app](https://desenhe.vercel.app) |
 
 ---
 
