@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Luis Guilherme — Todos os projetos. Portfólio completo de desenvolvimento web, APIs, extensões e data.">
+  <title>Projetos — Luis Guilherme</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0a0a0a;
+      --surface:  #111111;
+      --elevated: #1a1a1a;
+      --text:     #ffffff;
+      --muted:    rgba(255,255,255,0.6);
+      --subtle:   rgba(255,255,255,0.4);
+      --accent:   #6366f1;
+      --pink:     #ec4899;
+      --amber:    #f59e0b;
+      --cyan:     #06b6d4;
+      --purple:   #8b5cf6;
+      --border:   rgba(255,255,255,0.08);
+      --ease:     cubic-bezier(0.16, 1, 0.3, 1);
+      --radius:   20px;
+      --radius-sm:12px;
+      --font:     'Space Grotesk', sans-serif;
+      --mono:     'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    }
+    [data-reveal].visible { opacity: 1; transform: translateY(0); }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--subtle);
+      background: var(--elevated);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.25rem 0.625rem;
+      transition: all 0.2s;
+    }
+    .tag:hover { background: #222; color: var(--muted); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s var(--ease);
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: #5254cc; box-shadow: 0 8px 24px rgba(99,102,241,0.35); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-sm { padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: 10px; }
+
+    /* ── Navbar ── */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 1.5rem 2rem;
+      transition: all 0.4s var(--ease);
+    }
+    #navbar.scrolled {
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.875rem 2rem;
+    }
+    .nav-container {
+      max-width: 1300px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      align-items: center; gap: 2rem;
+    }
+    .nav-container .nav-cta, .nav-container .hamburger { justify-self: end; }
+    .nav-logo { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.02em; }
+    .nav-logo .dot { color: var(--accent); }
+    .nav-links {
+      display: flex; align-items: center; justify-content: center;
+      gap: 2rem; list-style: none;
+    }
+    .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--muted); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-cta {
+      background: var(--accent); color: #fff;
+      border: none; padding: 0.5rem 1.25rem;
+      border-radius: 50px; font-family: var(--font);
+      font-size: 0.85rem; font-weight: 500; cursor: pointer;
+      transition: all 0.3s var(--ease);
+    }
+    .nav-cta:hover { background: #5254cc; transform: translateY(-1px); }
+    .hamburger { display: none; background: none; border: 1px solid var(--border); color: var(--text); padding: 0.4rem 0.75rem; border-radius: 8px; font-size: 1rem; cursor: pointer; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.mobile-open {
+        display: flex; flex-direction: column; gap: 1rem;
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(10,10,10,0.97);
+        justify-content: center; align-items: center;
+        z-index: 999;
+      }
+      .nav-links.mobile-open a { font-size: 1.5rem; }
+      .hamburger { display: block; }
+      .nav-cta { display: none; }
+    }
+
+    /* ── Page Header ── */
+    .page-header {
+      padding: 10rem 0 4rem;
+    }
+    .page-header-inner {
+      max-width: 1300px; margin: 0 auto; padding: 0 2rem;
+    }
+    .page-tag {
+      font-family: var(--mono); font-size: 0.75rem;
+      color: var(--accent); letter-spacing: 0.05em;
+      display: block; margin-bottom: 0.75rem;
+    }
+    .page-title {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700; letter-spacing: -0.04em;
+      line-height: 1.05; margin-bottom: 1.25rem;
+    }
+    .page-desc { color: var(--muted); font-size: 1.05rem; line-height: 1.7; max-width: 500px; }
+    .page-stats {
+      display: flex; gap: 2.5rem; margin-top: 2.5rem; flex-wrap: wrap;
+    }
+    .stat-item { display: flex; flex-direction: column; gap: 0.25rem; }
+    .stat-number { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; }
+    .stat-label { font-family: var(--mono); font-size: 0.72rem; color: var(--subtle); }
+
+    /* ── Filters ── */
+    .filters-bar {
+      padding: 0 0 3rem;
+    }
+    .filters-inner {
+      max-width: 1300px; margin: 0 auto; padding: 0 2rem;
+    }
+    .filter-pills {
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
+    }
+    .filter-pill {
+      font-family: var(--mono); font-size: 0.78rem;
+      padding: 0.45rem 1rem; border-radius: 50px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--muted); cursor: pointer;
+      transition: all 0.25s var(--ease);
+    }
+    .filter-pill:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+    .filter-pill.active {
+      background: var(--accent); border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* ── Projects Grid ── */
+    .all-projects {
+      padding: 0 0 7rem;
+    }
+    .projects-grid {
+      max-width: 1300px; margin: 0 auto; padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    /* ── Category label ── */
+    .category-section { grid-column: 1 / -1; margin-top: 1rem; }
+    .category-label {
+      font-family: var(--mono); font-size: 0.72rem;
+      color: var(--subtle); letter-spacing: 0.08em; text-transform: uppercase;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      display: block;
+    }
+
+    /* ── Project Card ── */
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: all 0.35s var(--ease);
+      cursor: pointer;
+      position: relative;
+      display: flex; flex-direction: column;
+    }
+    .project-card:hover {
+      border-color: rgba(255,255,255,0.15);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.5);
+    }
+    .card-number {
+      position: absolute; top: 1rem; left: 1rem;
+      font-family: var(--mono); font-size: 0.7rem; font-weight: 500;
+      color: var(--muted); background: rgba(10,10,10,0.6);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50px; padding: 0.25rem 0.75rem;
+      z-index: 2; transition: transform 0.3s var(--ease);
+    }
+    .project-card:hover .card-number { transform: scale(1.1); }
+    .project-card:hover .card-preview-img { transform: scale(1.04); }
+
+    .card-preview {
+      height: 200px; position: relative; overflow: hidden;
+    }
+    .card-preview-inner {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--preview-a, #6366f1), var(--preview-b, #ec4899));
+      transition: transform 0.5s var(--ease);
+    }
+    .project-card:hover .card-preview-inner { transform: scale(1.04); }
+    .card-preview-inner::after {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.08) 0%, transparent 60%);
+    }
+    .card-mock {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1;
+    }
+    .card-mock-window {
+      background: rgba(10,10,10,0.7); backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; padding: 0.75rem 1rem; width: 75%; max-width: 220px;
+    }
+    .mock-dots { display: flex; gap: 5px; margin-bottom: 0.6rem; }
+    .mock-dots span { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+    .mock-dots span:first-child { background: #ff5f57; }
+    .mock-dots span:nth-child(2) { background: #febc2e; }
+    .mock-dots span:last-child { background: #28c840; }
+    .mock-lines { display: flex; flex-direction: column; gap: 6px; }
+    .mock-line { height: 6px; border-radius: 3px; background: rgba(255,255,255,0.12); }
+    .mock-line.w80 { width: 80%; }
+    .mock-line.w60 { width: 60%; }
+    .mock-line.w70 { width: 70%; }
+    .mock-line.accent { width: 45%; background: var(--accent); opacity: 0.7; }
+
+    .card-img-fade {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.55) 100%);
+      pointer-events: none; z-index: 1;
+    }
+
+    .card-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; flex: 1; }
+    .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; }
+    .card-title { font-size: 1rem; font-weight: 600; letter-spacing: -0.02em; }
+    .card-status {
+      font-family: var(--mono); font-size: 0.65rem;
+      padding: 0.2rem 0.6rem; border-radius: 50px;
+      background: rgba(34,197,94,0.1); color: #22c55e;
+      border: 1px solid rgba(34,197,94,0.2); white-space: nowrap; flex-shrink: 0;
+    }
+    .card-status.wip {
+      background: rgba(245,158,11,0.1); color: var(--amber);
+      border-color: rgba(245,158,11,0.2);
+    }
+    .card-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .card-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: auto; }
+
+    /* ── Back button ── */
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--mono); font-size: 0.78rem;
+      color: var(--subtle); margin-bottom: 1.5rem;
+      transition: color 0.2s;
+    }
+    .back-btn:hover { color: var(--text); }
+    .back-btn svg { transition: transform 0.2s var(--ease); }
+    .back-btn:hover svg { transform: translateX(-3px); }
+
+    /* ── Hidden card ── */
+    .project-card.hidden { display: none; }
+
+    /* ── Footer ── */
+    footer {
+      padding: 2rem; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; max-width: 1300px; margin: 0 auto;
+    }
+    .footer-text { font-family: var(--mono); font-size: 0.78rem; color: var(--subtle); }
+    .footer-text a { color: var(--accent); transition: opacity 0.2s; }
+    .footer-text a:hover { opacity: 0.7; }
+
+    @media (max-width: 1024px) {
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .projects-grid { grid-template-columns: 1fr; }
+      .page-title { font-size: 2.5rem; }
+      .card-actions { flex-direction: column; }
+      footer { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 420px) {
+      .section-container, .projects-grid, .filters-inner, .page-header-inner { padding: 0 1.25rem; }
+      #navbar { padding-left: 1.25rem; padding-right: 1.25rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      [data-reveal] { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav id="navbar" aria-label="Navegação principal">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">LG<span class="dot">.</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#projects">Projetos</a></li>
+        <li><a href="index.html#about">Sobre</a></li>
+        <li><a href="index.html#contact">Contato</a></li>
+      </ul>
+      <button class="nav-cta" onclick="window.location.href='index.html#contact'">Fale comigo</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">☰</button>
+    </div>
+  </nav>
+
+  <!-- ── PAGE HEADER ── -->
+  <header class="page-header">
+    <div class="page-header-inner">
+      <a href="index.html" class="back-btn" data-reveal>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Voltar ao início
+      </a>
+      <span class="page-tag" data-reveal>// todos os projetos</span>
+      <h1 class="page-title" data-reveal>
+        Portfólio <span class="gradient-text">Completo</span>
+      </h1>
+      <p class="page-desc" data-reveal>
+        Todos os projetos que desenvolvi — de landing pages a pipelines de dados. Cada um com uma história por trás.
+      </p>
+      <div class="page-stats" data-reveal>
+        <div class="stat-item">
+          <span class="stat-number gradient-text">7</span>
+          <span class="stat-label">// projetos</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number gradient-text">5</span>
+          <span class="stat-label">// categorias</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number gradient-text">6</span>
+          <span class="stat-label">// em produção</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── FILTERS ── -->
+  <div class="filters-bar">
+    <div class="filters-inner" data-reveal>
+      <div class="filter-pills">
+        <button class="filter-pill active" data-filter="todos">Todos</button>
+        <button class="filter-pill" data-filter="landing-page">Landing Page</button>
+        <button class="filter-pill" data-filter="ferramenta">Ferramenta</button>
+        <button class="filter-pill" data-filter="api-backend">API / Backend</button>
+        <button class="filter-pill" data-filter="extensao">Extensão</button>
+        <button class="filter-pill" data-filter="data">Data</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PROJECTS ── -->
+  <main class="all-projects">
+    <div class="projects-grid">
+
+      <!-- 01 — Platinum Rocket -->
+      <article class="project-card" data-reveal data-category="landing-page" data-demo="https://platinumrocket.vercel.app/" data-github="#">
+        <div class="card-number">01</div>
+        <div class="card-preview" style="background:#0d0d14;">
+          <img src="PlatinumImage.jpg" alt="Preview — Platinum Rocket"
+            style="width:100%;height:auto;display:block;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
+            class="card-preview-img" />
+          <div class="card-img-fade"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-header">
+            <h3 class="card-title">Platinum Rocket</h3>
+            <span class="card-status">Em Produção</span>
+          </div>
+          <p class="card-desc">Sistema de gestão para salões de beleza — landing page de alta conversão com agenda, equipe e faturamento em um só lugar.</p>
+          <div class="card-tags">
+            <span class="tag">React</span>
+            <span class="tag">Next.js</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Tailwind</span>
+          </div>
+          <div class="card-actions">
+            <a href="https://platinumrocket.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Acessar Site <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:3px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 02 — Psicanalista Mariane Dinali -->
+      <article class="project-card" data-reveal data-category="landing-page" data-demo="https://marianedinali.vercel.app/" data-github="#">
+        <div class="card-number">02</div>
+        <div class="card-preview" style="background:#f5f0eb;">
+          <img src="mariane-preview.jpg" alt="Preview — Landing Page Psicanalista"
+            style="width:100%;height:auto;display:block;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
+            class="card-preview-img" />
+          <div class="card-img-fade"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-header">
+            <h3 class="card-title">Landing Page — Psicanalista</h3>
+            <span class="card-status">Em Produção</span>
+          </div>
+          <p class="card-desc">Landing page profissional para psicanalista com design acolhedor, apresentação de serviços e links diretos de contato para agendamento.</p>
+          <div class="card-tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">Vercel</span>
+          </div>
+          <div class="card-actions">
+            <a href="https://marianedinali.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Acessar Site <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:3px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 03 — Calculadora CLT -->
+      <article class="project-card" data-reveal data-category="ferramenta" data-demo="https://calculadoraclt-amber.vercel.app/" data-github="https://github.com/LuisGuilhermeRampaso/calculadora-clt">
+        <div class="card-number">03</div>
+        <div class="card-preview" style="background:#0d0d14;">
+          <img src="CalculadoraCLT.jpg" alt="Preview — Calculadora CLT"
+            style="width:100%;height:auto;display:block;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
+            class="card-preview-img" />
+          <div class="card-img-fade"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-header">
+            <h3 class="card-title">Calculadora CLT Real</h3>
+            <span class="card-status">Em Produção</span>
+          </div>
+          <p class="card-desc">Ferramenta que calcula o custo real de um funcionário CLT para a empresa, incluindo encargos, provisões e benefícios.</p>
+          <div class="card-tags">
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Tailwind</span>
+          </div>
+          <div class="card-actions">
+            <a href="https://calculadoraclt-amber.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Acessar Site <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:3px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            <a href="https://github.com/LuisGuilhermeRampaso/calculadora-clt" target="_blank" rel="noopener" class="btn btn-outline btn-sm" onclick="event.stopPropagation()">GitHub</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 04 — API REST -->
+      <article class="project-card" data-reveal data-category="api-backend" data-demo="https://github.com/LuisGuilhermeRampaso/rest-api#endpoints" data-github="https://github.com/LuisGuilhermeRampaso/rest-api">
+        <div class="card-number">04</div>
+        <div class="card-preview" style="background:#0d0d14;">
+          <img src="ApiRest.jpg" alt="Preview — API REST Documentada"
+            style="width:100%;height:auto;display:block;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
+            class="card-preview-img" />
+          <div class="card-img-fade"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-header">
+            <h3 class="card-title">API REST Documentada</h3>
+            <span class="card-status">Em Produção</span>
+          </div>
+          <p class="card-desc">API RESTful com autenticação JWT, CRUD completo, documentação Swagger e arquitetura em camadas.</p>
+          <div class="card-tags">
+            <span class="tag">Node.js</span>
+            <span class="tag">Express</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Swagger</span>
+            <span class="tag">JWT</span>
+          </div>
+          <div class="card-actions">
+            <a href="https://github.com/LuisGuilhermeRampaso/rest-api#endpoints" target="_blank" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver Docs <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:3px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            <a href="https://github.com/LuisGuilhermeRampaso/rest-api" target="_blank" rel="noopener" class="btn btn-outline btn-sm" onclick="event.stopPropagation()">GitHub</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 05 — Air Canvas -->
+      <article class="project-card" data-reveal data-category="ferramenta" data-demo="https://desenhe.vercel.app" data-github="https://github.com/LuisGuilhermeRampaso/HandDrawingV.2">
+        <div class="card-number">05</div>
+        <div class="card-preview" style="background:#020d14;position:relative;overflow:hidden;">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(6,182,212,0.18) 0%,transparent 60%),radial-gradient(ellipse at 80% 30%,rgba(99,102,241,0.12) 0%,transparent 55%);"></div>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(6,182,212,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            <span style="font-family:var(--mono);font-size:0.7rem;color:rgba(6,182,212,0.6);letter-spacing:0.1em;">DRAW WITH HANDS</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-header">
+            <h3 class="card-title">Air Canvas</h3>
+            <span class="card-status">Em Produção</span>
+          </div>
+          <p class="card-desc">Desenhe no ar usando apenas as mãos pela câmera. Reconhecimento de gestos em tempo real com MediaPipe e Canvas API.</p>
+          <div class="card-tags">
+            <span class="tag">Python</span>
+            <span class="tag">MediaPipe</span>
+            <span class="tag">Canvas API</span>
+            <span class="tag">Tailwind</span>
+          </div>
+          <div class="card-actions">
+            <a href="https://desenhe.vercel.app" target="_blank" rel="noopener" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver Demo <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:3px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            <a href="https://github.com/LuisGuilhermeRampaso/HandDrawingV.2" target="_blank" rel="noopener" class="btn btn-outline btn-sm" onclick="event.stopPropagation()">GitHub</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 06 — Bíblia Online -->
+      <article class="project-card" data-reveal data-category="extensao" data-demo="https://chromewebstore.google.com/detail/b%C3%ADblia-online/pbfabhcohemllmkacfbmkagdnjmhinhm?hl=pt-BR&utm_source=ext_sidebar" data-github="https://github.com/LuisGuilhermeRampaso/bible-extension">
+        <div class="card-number">06</div>
+        <div class="card-preview" style="background:#0d1117;">
+          <img src="bible-preview.png" alt="Preview da extensão Bíblia Online"
+            style="width:100%;height:100%;object-fit:cover;object-position:center center;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
+            class="card-preview-img" />
+          <div class="card-img-fade"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-header">
+            <h3 class="card-title">Bíblia Online</h3>
+            <span class="card-status">Em Produção</span>
+          </div>
+          <p class="card-desc">Extensão para Chrome com navegação por livros e capítulos, múltiplas versões e modo escuro.</p>
+          <div class="card-tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">Chrome API</span>
+            <span class="tag">CSS</span>
+          </div>
+          <div class="card-actions">
+            <a href="https://chromewebstore.google.com/detail/b%C3%ADblia-online/pbfabhcohemllmkacfbmkagdnjmhinhm?hl=pt-BR&utm_source=ext_sidebar" target="_blank" rel="noopener" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver na Chrome Store <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:3px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            <a href="https://github.com/LuisGuilhermeRampaso/bible-extension" target="_blank" rel="noopener" class="btn btn-outline btn-sm" onclick="event.stopPropagation()">GitHub</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 07 — EconBR -->
+      <article class="project-card" data-reveal data-category="data" data-demo="#" data-github="https://github.com/LuisGuilhermeRampaso/EconBR">
+        <div class="card-number">07</div>
+        <div class="card-preview" style="background:#03080f;position:relative;overflow:hidden;">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 20% 60%,rgba(34,197,94,0.15) 0%,transparent 55%),radial-gradient(ellipse at 80% 20%,rgba(6,182,212,0.1) 0%,transparent 50%);"></div>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:2rem;">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+              <div style="display:flex;align-items:flex-end;gap:3px;height:60px;">
+                <div style="width:8px;height:30%;background:rgba(34,197,94,0.4);border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:55%;background:rgba(34,197,94,0.5);border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:45%;background:rgba(34,197,94,0.4);border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:75%;background:rgba(34,197,94,0.7);border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:60%;background:rgba(34,197,94,0.6);border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:90%;background:#22c55e;border-radius:2px 2px 0 0;"></div>
+              </div>
+              <span style="font-family:var(--mono);font-size:0.6rem;color:rgba(34,197,94,0.6);">SELIC</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div style="font-family:var(--mono);font-size:0.65rem;color:rgba(255,255,255,0.4);">IPCA <span style="color:#22c55e;">4.83%</span></div>
+              <div style="font-family:var(--mono);font-size:0.65rem;color:rgba(255,255,255,0.4);">SELIC <span style="color:#06b6d4;">10.50%</span></div>
+              <div style="font-family:var(--mono);font-size:0.65rem;color:rgba(255,255,255,0.4);">USD/BRL <span style="color:#f59e0b;">5.12</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-header">
+            <h3 class="card-title">EconBR — Dashboard Econômico</h3>
+            <span class="card-status wip">Em Desenvolvimento</span>
+          </div>
+          <p class="card-desc">Pipeline de dados que coleta indicadores econômicos brasileiros (SELIC, IPCA, câmbio, CDI) via APIs do BCB e IBGE e exibe em dashboard interativo.</p>
+          <div class="card-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Streamlit</span>
+            <span class="tag">DuckDB</span>
+            <span class="tag">dbt</span>
+            <span class="tag">Plotly</span>
+          </div>
+          <div class="card-actions">
+            <a href="https://github.com/LuisGuilhermeRampaso/EconBR" target="_blank" rel="noopener" class="btn btn-outline btn-sm" onclick="event.stopPropagation()">GitHub <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:3px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <span class="footer-text">Luis Guilherme &copy; 2025</span>
+    <span class="footer-text"><a href="index.html">← Voltar ao portfólio</a></span>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('mobile-open');
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      hamburger.textContent = isOpen ? '✕' : '☰';
+    });
+
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const siblings = [...(entry.target.parentElement.querySelectorAll('[data-reveal]'))];
+        const idx = siblings.indexOf(entry.target);
+        setTimeout(() => entry.target.classList.add('visible'), Math.min(idx * 80, 400));
+        revealObs.unobserve(entry.target);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('[data-reveal]').forEach(el => revealObs.observe(el));
+
+    // Filter
+    const pills = document.querySelectorAll('.filter-pill');
+    const cards = document.querySelectorAll('.project-card');
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        const filter = pill.dataset.filter;
+        cards.forEach(card => {
+          const match = filter === 'todos' || card.dataset.category === filter;
+          card.classList.toggle('hidden', !match);
+        });
+      });
+    });
+
+    // Card click-through
+    cards.forEach(card => {
+      card.addEventListener('click', e => {
+        if (!e.target.closest('a')) {
+          const demo = card.querySelector('.btn-primary');
+          if (demo) demo.click();
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
