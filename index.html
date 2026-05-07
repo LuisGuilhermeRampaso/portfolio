@@ -479,9 +479,16 @@
     .project-card:hover .card-preview-img { transform: scale(1.04); }
 
     .card-preview {
-      height: 200px;
+      height: 220px;
       position: relative;
       overflow: hidden;
+    }
+    .card-img-fade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.55) 100%);
+      pointer-events: none;
+      z-index: 1;
     }
     .card-preview-inner {
       position: absolute;
@@ -860,8 +867,9 @@
 
           <div class="card-preview" style="background:#0d0d14;">
             <img src="PlatinumImage.jpg" alt="Preview — Platinum Rocket"
-              style="width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
+              style="width:100%;height:100%;object-fit:cover;object-position:center 15%;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
               class="card-preview-img" />
+            <div class="card-img-fade"></div>
           </div>
 
           <div class="card-body">
@@ -890,9 +898,10 @@
             <img
               src="bible-preview.png"
               alt="Preview da extensão Bíblia Online"
-              style="width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
+              style="width:100%;height:100%;object-fit:cover;object-position:center center;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
               class="card-preview-img"
             />
+            <div class="card-img-fade"></div>
           </div>
           <div class="card-body">
             <div class="card-header">
@@ -918,8 +927,9 @@
           <div class="card-number">03</div>
           <div class="card-preview" style="background:#0d0d14;">
             <img src="CalculadoraCLT.jpg" alt="Preview — Calculadora CLT"
-              style="width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
+              style="width:100%;height:100%;object-fit:cover;object-position:center 10%;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
               class="card-preview-img" />
+            <div class="card-img-fade"></div>
           </div>
           <div class="card-body">
             <div class="card-header">
@@ -945,8 +955,9 @@
           <div class="card-number">04</div>
           <div class="card-preview" style="background:#0d0d14;">
             <img src="ApiRest.jpg" alt="Preview — API REST Documentada"
-              style="width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
+              style="width:100%;height:100%;object-fit:cover;object-position:center 30%;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
               class="card-preview-img" />
+            <div class="card-img-fade"></div>
           </div>
           <div class="card-body">
             <div class="card-header">
