@@ -4,6 +4,20 @@ Fluxo completo de atendimento via WhatsApp com Agente de IA para clínica estét
 
 ---
 
+## Screenshots do Fluxo
+
+<table>
+  <tr>
+    <td><img src="Foto1Fluxo.jpg" alt="Fluxo n8n — visão geral" width="100%"/></td>
+    <td><img src="Foto2Fluxo.jpg" alt="Fluxo n8n — agente e tools" width="100%"/></td>
+  </tr>
+  <tr>
+    <td colspan="2"><img src="Foto3Fluxo.jpg" alt="Fluxo n8n — buffer e memória" width="100%"/></td>
+  </tr>
+</table>
+
+---
+
 ## Visão Geral do Fluxo
 
 ```
