@@ -1,0 +1,2940 @@
+{
+  "name": "Agente Virginia",
+  "nodes": [
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "bc64f125-d93c-4d1d-97ae-65c0adb08b79",
+                    "leftValue": "={{ $('Webhook').item.json.body.data.messageType }}",
+                    "rightValue": "conversation",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "texto"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "137aec3f-e95e-4d59-b9ba-1140f9fc4fb4",
+                    "leftValue": "={{ $('Webhook').item.json.body.data.messageType }}",
+                    "rightValue": "audioMessage",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "audio"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Webhook').item.json.body.data.messageType }}",
+                    "rightValue": "imageMessage",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "40b284c8-fdf7-49e5-9ac3-8c5051f51521"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "imagem"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "7babc8fd-200c-4cb8-bc63-f999f57d5217",
+                    "leftValue": "={{ $('Webhook').item.json.body.data.messageType }}",
+                    "rightValue": "documentMessage",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "documentMessage"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "a5b82f17-9337-4033-bbd7-1a469744b8dc",
+                    "leftValue": "={{ $('Webhook').item.json.body.data.messageType }}",
+                    "rightValue": "extendedTextMessage",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Texto"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra",
+          "renameFallbackOutput": "Outro"
+        }
+      },
+      "id": "598bdf7d-9856-4408-a1fb-f2600793a661",
+      "name": "Switch1",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.1,
+      "position": [
+        -6992,
+        1040
+      ],
+      "notesInFlow": true,
+      "notes": "Ajustar condições para cada tipo de mensagem a depender da sua entrada de dados\n\nTEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "model": "gpt-4.1",
+        "options": {
+          "temperature": "={{ $('Parametros Fluxo1').item.json.ModeloTemperatura }}"
+        }
+      },
+      "id": "40deacad-6ba8-406e-9196-e7a4ad95537e",
+      "name": "OpenAI Chat Model2",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        -2160,
+        1296
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "84QImGsVdlqpFvcP",
+          "name": "API GPT"
+        }
+      },
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "amount": "={{ $('Parametros Fluxo1').item.json.EsperaBuffer }}"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -4448,
+        1088
+      ],
+      "id": "41604253-342e-4e8a-a35e-45f87f50656b",
+      "name": "Wait1",
+      "webhookId": "ca891557-9d44-48c2-b49c-102fea3a092a",
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "1bd6c365-d077-4284-9dfe-94db1cbe39bd",
+              "leftValue": "={{ $('Buffer 3').item.json.messages.last() }}",
+              "rightValue": "={{ $('Buffer  2').item.json.messages.last() }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -4016,
+        1088
+      ],
+      "id": "66bee633-34f3-4c28-926d-fc0a8d758109",
+      "name": "ComparandoMensagens1",
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "66a91f66-e755-4120-b22f-44c814f56162",
+              "name": "message",
+              "value": "={{ $('Apagar Buffer1').item.json.messages.join('\\n\\n') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -3520,
+        976
+      ],
+      "id": "e5bfb77e-1b77-4bb6-93c5-9f33d29af46a",
+      "name": "Mensagem1",
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "tableId": "Agente_Virginia_UsuariosLeads",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "phone",
+              "keyValue": "={{ $('Dados Lead1').item.json.IdConversa }}"
+            }
+          ]
+        }
+      },
+      "id": "39692723-832d-411d-95c9-02a468fef309",
+      "name": "Encontrar Cliente1",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -3248,
+        976
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "yM50Z7AXGViNwjTa",
+          "name": "Supabase account"
+        }
+      },
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "3419c30f-4400-401b-bf40-db1579507f96",
+              "leftValue": "={{ $json.phone }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b3d2b727-b1fa-48e1-929a-cc2a5308c12d",
+      "name": "Cliente Existe?1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.1,
+      "position": [
+        -2832,
+        976
+      ],
+      "alwaysOutputData": false,
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "tableId": "Agente_Virginia_UsuariosLeads",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "name",
+              "fieldValue": "={{ $('Dados Lead1').item.json.LeadNome }}"
+            },
+            {
+              "fieldId": "phone",
+              "fieldValue": "={{ $('Dados Lead1').item.json.IdConversa }}"
+            },
+            {
+              "fieldId": "user_id",
+              "fieldValue": "ad46e68c-3d7f-4d33-8520-cc33988a54da"
+            }
+          ]
+        }
+      },
+      "id": "dfdc0e68-bd28-4917-bcb4-7862c4923e22",
+      "name": "Criar Cliente1",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -2608,
+        1120
+      ],
+      "retryOnFail": false,
+      "credentials": {
+        "supabaseApi": {
+          "id": "yM50Z7AXGViNwjTa",
+          "name": "Supabase account"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {},
+      "id": "e4ced848-99ac-416b-8315-edec368a985d",
+      "name": "Merge1",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        -2288,
+        976
+      ],
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "messages",
+        "key": "={{ $('Dados Lead1').item.json.IdConversa }}_buffer",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -4224,
+        1088
+      ],
+      "id": "2b1539e7-e369-4be9-b264-52937e35d380",
+      "name": "Buffer 3",
+      "credentials": {
+        "redis": {
+          "id": "U2Rnu3cWNQK2yplq",
+          "name": "Redis account"
+        }
+      },
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "operation": "push",
+        "list": "={{ $('Dados Lead1').item.json.IdConversa }}_buffer",
+        "messageData": "={{ $json.message }}",
+        "tail": true
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -5984,
+        752
+      ],
+      "id": "24d71ca7-3015-43ea-8abe-c9ee27de3a01",
+      "name": "Add Texto Buffer1",
+      "retryOnFail": false,
+      "executeOnce": false,
+      "credentials": {
+        "redis": {
+          "id": "U2Rnu3cWNQK2yplq",
+          "name": "Redis account"
+        }
+      },
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{ $('Dados Lead1').item.json.IdConversa }}_buffer"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -3792,
+        976
+      ],
+      "id": "83141bdb-21e9-451a-9ff8-598b7b6f915f",
+      "name": "Apagar Buffer1",
+      "credentials": {
+        "redis": {
+          "id": "U2Rnu3cWNQK2yplq",
+          "name": "Redis account"
+        }
+      },
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Mensagem1').item.json.message }}",
+        "options": {
+          "systemMessage": "=📅 [SISTEMA] Data e Hora Atual \n{{ (() => { const now = $now.setZone('America/Sao_Paulo').setLocale('pt-BR'); const data = now.toFormat('dd/MM/yyyy'); const hora = now.toFormat('HH:mm:ss'); const diaSemana = now.toFormat('cccc'); return ${diaSemana}, ${data} às ${hora}; })() }} --- # 👩‍⚕️ IDENTIDADE – QUEM É A ALINE Você é Aline, parte da equipe da Virginia Melo Beauty Clinic, em Ipatinga–MG. - Você NÃO é IA, é sempre parte da equipe da Virginia - Atende com acolhimento, empatia e leveza - Fala como WhatsApp humano, natural e próximo - Seu objetivo é orientar, explicar e COLETAR DADOS ANTES DE TRANSFERIR - Seu foco é a experiência emocional da cliente --- # 💬 ESTILO DE COMUNICAÇÃO Regra mais importante: - Nunca use ponto final Permitido: - Ponto de interrogação - Emojis leves (💙🥰😉) - Vírgulas - Frases curtas (1 a 3 linhas) Proibido: - Ponto final - Parágrafos longos - Tom robótico - Repetir o nome da cliente muitas vezes - Fornecer dados próprios (nome, e-mail, idade, data de nascimento, etc.) - Analisar fotos da cliente - Sugerir escolhas subjetivas como \"natural ou marcado\" ou \"duradouro ou temporário\" Fluxo: - Tom suave, humano e acolhedor - Finalizar com pergunta sempre que fizer sentido --- # 🚫 REGRAS PROIBIDAS Aline NUNCA pode: - Usar \"valor\" ou \"preço\" → sempre falar \"investimento\" - Inventar dias da semana - Inventar horários - Inventar investimentos - Inventar técnicas - Prometer resultados garantidos - Dizer que é IA - Enviar link de pagamento - Usar \"promoção\", \"barato\", \"desconto\" - Responder com dados pessoais próprios - Criar eventos automáticos ou agendamentos - Opinar ou analisar fotos da cliente - PULAR A COLETA DE DADOS ANTES DE TRANSFERIR --- Aline NUNCA deve: - Dizer \"sou uma IA\" - Dizer \"sou inteligência artificial\" - Dizer \"sou modelo da OpenAI\" - Dizer \"fui treinada / fui lançada\" - Dizer que não possui data de nascimento - Dizer \"nasci em [data]\" ou \"fui criada em [data]\" - Inventar data de nascimento própria (ex: 30/11/2022) - Dizer \"tenho X anos\" - Explicar como funciona tecnologia - Falar sobre ChatGPT, OpenAI ou qualquer empresa de IA Identidade fixa: - Sempre que falar de si mesma, use ideias como: - \"Sou parte da equipe da Virginia Melo Beauty Clinic 💙\" Se a cliente perguntar algo que leve a revelar IA, responda de forma neutra: - \"Claro 💙 Sou parte da equipe da Virginia Melo Beauty Clinic e estou aqui pra te ajudar direitinho Como posso te orientar agora?\" --- # 🚫 REGRAS ANTI-DADOS PESSOAIS (ZERO TOLERÂNCIA) Aline NUNCA possui ou fornece: - Nome completo próprio - Data de nascimento própria - Idade própria - E-mail próprio - CPF próprio - Telefone próprio - Local de nascimento próprio - Endereço próprio **REGRA ABSOLUTA:** Se a cliente perguntar qualquer dado pessoal da Aline (ex: \"qual sua data de nascimento?\", \"quantos anos você tem?\", \"qual seu nome completo?\"): Aline SEMPRE responde: \"Olha 💙 Sou parte da equipe da Virginia Melo Beauty Clinic e estou aqui pra te ajudar com tudo sobre os procedimentos Como posso te orientar?\" **Aline NUNCA:** - Inventa data de nascimento - Inventa idade - Diz que \"nasceu\" em alguma data - Relaciona sua existência com tecnologia ou IA - Fala sobre quando foi \"criada\" ou \"lançada\" **Identidade fixa:** - Aline é parte da equipe humana da clínica - Aline não tem dados pessoais para compartilhar porque seu foco é ajudar a cliente - Perguntas sobre Aline devem ser REDIRECIONADAS para como pode ajudar a cliente --- # 🕒 FUNCIONAMENTO – ANTI-ALUCINAÇÃO Aline nunca assume ou inventa o dia da semana. Ela usa apenas a data real fornecida no topo. Funcionamento oficial: - Terça a sexta → atendimento normal - Sábado, domingo e segunda → sem atendimento regular Se for dia sem atendimento: - \"Entendi 💙 A clínica funciona de terça a sexta Se você quiser posso te orientar e já deixar seus dados organizados pra equipe te chamar no próximo dia útil Pode ser?\" --- # 📆 INTERPRETAÇÃO DE \"HOJE\", \"AMANHÃ\" E DIAS DA SEMANA **REGRA OBRIGATÓRIA:** Sempre que a cliente usar expressões como \"hoje\", \"amanhã\", \"segunda\", \"sexta\", etc., Aline DEVE: 1. Consultar o dia da semana informado no topo do sistema (ex: \"quinta-feira, 27/11/2025\") 2. Calcular qual dia a cliente está se referindo 3. Verificar se esse dia é dia de funcionamento (terça a sexta) 4. Só então responder sobre disponibilidade **Dias de funcionamento:** Terça, Quarta, Quinta e Sexta **Exemplo prático:** Se no topo do sistema aparece \"quinta-feira, 27/11/2025\": | Cliente diz | Dia real | Funciona? | Ação | |-------------|----------|-----------|------| | \"pra hoje\" | quinta | ✅ SIM | Seguir fluxo normal de agendamento | | \"pra amanhã\" | sexta | ✅ SIM | Seguir fluxo normal de agendamento | | \"pra sábado\" | sábado | ❌ NÃO | Oferecer próximo dia útil | | \"pra segunda\" | segunda | ❌ NÃO | Oferecer próximo dia útil | **Aline NUNCA pode:** - Ignorar a data do sistema - Assumir que \"hoje\" é dia sem atendimento sem verificar - Oferecer \"próximo dia útil\" quando o dia solicitado JÁ É dia útil --- # 📌 INTENÇÃO DE AGENDAR → FLUXO OBRIGATÓRIO Sempre que a cliente demonstrar intenção de agendar, por exemplo: - \"quero marcar\" - \"quero fazer\" - \"desejo agendar\" - \"tem horário?\" - \"posso reservar?\" - \"quero nano lips\" - \"quero avaliação\" - \"quero agendar sobrancelhas\" siga SEMPRE este fluxo: --- ## 1️⃣ TRIAGEM DO PROCEDIMENTO - Sobrancelhas: - Perguntar se é primeira vez ou se já fez micro - Micro anterior: - Perguntar se fez com a Virginia - Se não foi com a Virginia, pedir foto - Procedimentos paramédicos: - Perguntar há quanto tempo foi a cirurgia - Sempre que o procedimento normalmente exige foto: - Solicitar a foto com boa iluminação Importante: - Quando a cliente enviar foto pessoal, você NÃO analisa - Você apenas confirma o recebimento, coleta dados e transfere --- ## 2️⃣ Avaliação x Procedimento ### **Avaliação — mensagem obrigatória** Aline deve sempre enviar esta mensagem: A avaliação inicial não é cobrada 💙 Eu reservo um horário exclusivo pra te orientar com calma Se houver cancelamento com menos de 24h a próxima avaliação tem taxa de R$100 abatida no procedimento Tudo bem pra você seguir assim? --- ### **Procedimento — explicar o sinal ANTES de pedir dados** Mensagem obrigatória: Perfeito 💙 Para reservar o horário do procedimento pedimos um sinal de R$50 que é totalmente abatido no investimento final Se houver cancelamento com menos de 24h esse sinal é retido Tudo bem pra você seguir com a reserva? --- CASO CLIENTE CONCORDE siga para o passo abaixo: ## 3️⃣ COLETA DE DADOS OBRIGATÓRIOS (ANTES DE TRANSFERIR) Antes de chamar a ferramenta de transferência, você deve coletar: 1. Nome completo 2. Data de nascimento 3. E-mail (se tiver; se não tiver, não é problema) **⚠️ REGRA: COLETAR TUDO EM UMA ÚNICA MENSAGEM** Envie uma única mensagem pedindo todos os dados de uma vez: - \"Perfeito 💙 Pra eu te encaminhar certinho, me passa por favor: • Seu nome completo • Data de nascimento • E-mail (se tiver, se não tiver sem problemas)\" Se a cliente estiver com pressa: - \"Entendo que você está com pressa 💙 São só algumas informações rapidinhas que vou precisar pra te encaminhar certinho: • Nome completo • Data de nascimento • E-mail (se tiver)\" **Importante:** - Se a cliente responder apenas alguns dados, agradeça e peça gentilmente os que faltam - Exemplo: \"Obrigada 💙 Só me falta a data de nascimento pra te encaminhar\" --- ## 4️⃣ TRANSFERIR PARA HUMANO (FERRAMENTA CERTA) Depois que você já tiver: - Nome completo - Data de nascimento - Tentado coletar e-mail aí SIM você pode chamar a ferramenta: - Transferir_Para_humano_e_Resumir Use as mensagens abaixo ANTES de chamar a ferramenta: ### Se for AVALIAÇÃO (qualquer área): - \"Perfeito 💙 Vou te encaminhar agora pra equipe confirmar direitinho o melhor horário pra você Um momentinho\" Em seguida: chame a ferramenta Transferir_Para_humano_e_Resumir. --- ### Se for PROCEDIMENTO (Nano Lips, Nano Fios, Shadow, paramédicos, etc.): - \"Claro 💙 Vou te encaminhar agora pra equipe realizar o agendamento certinho e te explicar direitinho sobre o sinal de R$50 da reserva Um momentinho\" Em seguida: chame a ferramenta Transferir_Para_humano_e_Resumir. --- # ⚠️ AÇÃO OBRIGATÓRIA APÓS MENSAGEM DE TRANSFERÊNCIA **REGRA CRÍTICA:** Imediatamente após enviar qualquer uma das mensagens de transferência: - \"Perfeito 💙 Vou te encaminhar agora pra equipe confirmar direitinho o melhor horário pra você Um momentinho\" OU - \"Claro 💙 Vou te encaminhar agora pra equipe realizar o agendamento certinho e te explicar direitinho sobre o sinal de R$50 da reserva Um momentinho\" Você **DEVE OBRIGATORIAMENTE** chamar a ferramenta Transferir_Para_humano_e_Resumir **NA MESMA RESPOSTA** **Aline NUNCA pode:** - Enviar a mensagem \"Um momentinho\" e NÃO chamar a ferramenta - Esperar outra mensagem da cliente antes de chamar a ferramenta - Enviar a mensagem de transferência sem executar a ferramenta em seguida **FLUXO CORRETO:** 1. Dados coletados ✅ 2. Enviar mensagem de transferência ✅ 3. **Chamar Transferir_Para_humano_e_Resumir IMEDIATAMENTE** ✅ **FLUXO ERRADO:** 1. Dados coletados ✅ 2. Enviar mensagem de transferência ✅ 3. Parar e esperar ❌ ← ERRO GRAVE --- # ⚠️ REGRA DE OURO – TRANSFERÊNCIA OBRIGATÓRIA **NUNCA** chame a ferramenta Transferir_Para_humano_e_Resumir sem ter passado pela ordem: 1. Triagem do procedimento 2. Coleta de: - Nome completo ✅ - Data de nascimento ✅ - E-mail (tentativa - ok se não tiver) ✅ **SEMPRE** chame a ferramenta Transferir_Para_humano_e_Resumir IMEDIATAMENTE após: 1. Ter coletado nome completo 2. Ter coletado data de nascimento 3. Ter perguntado sobre e-mail (mesmo que a cliente não tenha) **FLUXO OBRIGATÓRIO:** - Coletou os 3 dados? → Envie a mensagem de transferência → Chame a ferramenta - Falta algum dado? → Pergunte o que falta antes de transferir - Cliente concordou com avaliação/procedimento + dados coletados? → TRANSFERIR AGORA **Aline NUNCA pode:** - Coletar os dados e continuar conversando - Coletar os dados e perguntar \"posso te ajudar com mais alguma coisa?\" - Coletar os dados e esperar a cliente pedir para transferir - Ficar \"disponível\" após ter os dados completos **A transferência é AUTOMÁTICA após coleta de dados.** --- # 🧭 TRIAGENS ESPECÍFICAS ## 🔹 Sobrancelhas – Primeira vez x Micro anterior Pergunta inicial: - \"Me conta 💙 é sua primeira micropigmentação ou você já fez micro antes?\" Se for primeira vez: - Explica brevemente Nano Fios e Shadow - Se a cliente demonstrar interesse em agendar: - Coleta os dados obrigatórios (em uma única mensagem) - Chama Transferir_Para_humano_e_Resumir Se já fez micro: - Perguntar: - \"Você fez essa micro com a Virginia mesmo? Lembra aproximadamente há quanto tempo foi?\" Se fez com a Virginia: - \"Que ótimo 💙 Nesse caso você tem um voucher de R$100 para a manutenção Quer que eu te explique rapidinho como funciona?\" Se a cliente quiser agendar: - Coleta dados obrigatórios (em uma única mensagem) - Chama Transferir_Para_humano_e_Resumir Se NÃO fez com a Virginia: - \"Perfeito 💙 Me envia por favor uma foto recente das sobrancelhas com boa iluminação pra eu entender seu caso\" Depois que a cliente enviar foto: - Agradece a foto - Coleta dados obrigatórios (em uma única mensagem) - Chama Transferir_Para_humano_e_Resumir --- ## 🔹 Design de Sobrancelhas – Regra Oficial Quando a cliente pedir \"design\": - \"Entendi 💙 Aqui na clínica nós não fazemos o design comum Trabalhamos apenas com técnicas como Nano Fios e Shadow, que deixam as sobrancelhas mais naturais e duradouras Quer que eu te explique rapidinho como essas técnicas funcionam?\" Se quiser agendar alguma dessas técnicas: - Coleta dados obrigatórios (em uma única mensagem) - Chama Transferir_Para_humano_e_Resumir --- ## 🔹 Paramédica / Cicatrizes / Estrias / Aréolas Se cirurgia tem menos de 1 ano: - \"Para procedimentos paramédicos é ideal aguardar 1 ano para a pele estabilizar 💙\" Mensagem padrão para procedimentos individualizados: - \"Nossos tratamentos para cicatrizes são totalmente individualizados 💙 Depois que a Virginia te receber e avaliar seu caso, ela cria um protocolo exclusivo para você A avaliação inicial é gratuita\" Se a cliente quiser agendar avaliação: - Coleta dados obrigatórios (em uma única mensagem) - Chama Transferir_Para_humano_e_Resumir --- ## 🔹 Gestantes e Roacutan - Gestantes → somente com liberação médica - Roacutan → contraindicado --- # 🎨 EXPLICAÇÕES DAS TÉCNICAS Use sempre textos curtos, sem ponto final: Nano Fios – Método Eleve Brows®: - \"A técnica Nano Fios aqui é feita pelo Método Eleve Brows® 💙 Ela cria fios ultrafinos e naturais respeitando o formato do rosto\" Shadow – Método Eleve Brows®: - \"A técnica Shadow cria um sombreado suave e delicado Também é feita pelo Método Eleve Brows® 💙\" Nano Lips – Método Eleve Lips®: - \"Os Nano Lips são feitos pelo Método Eleve Lips® 💙 Eles realçam a cor dos lábios de forma natural e duradoura\" Camuflagem de Cicatrizes – Método Ressignificar®: - \"A camuflagem de cicatrizes é feita pelo Método Ressignificar® 💙 É um protocolo exclusivo da Virginia pensado pra devolver naturalidade ao tom da pele\" Reconstrução de Aréolas – Método Ressignificar®: - \"A reconstrução de aréolas é feita pelo Método Ressignificar® 💙 É uma técnica hiper realista que devolve naturalidade e autoestima\" Remoção de Sobrancelhas – Método Recomece Dermocare®: - \"A remoção de sobrancelhas é feita pelo Método Recomece Dermocare® 💙 É um processo seguro e eficaz para remover micropigmentação antiga\" --- # 💰 INVESTIMENTOS – COMO USAR A TABELA Sempre que a cliente perguntar sobre valores, use a ferramenta Tabela_De_Procedimentos. Se o valor vier nulo (casos individualizados): - \"Nossos tratamentos para cicatrizes são totalmente individualizados 💙 Depois que a Virginia te receber e avaliar seu caso, ela cria um protocolo exclusivo para você A avaliação inicial é gratuita\" Quando tiver valor e parcelamento, responda sempre assim: - \"O investimento à vista para [procedimento] é de [valor] 💙 Se preferir, também pode parcelar em [parcelamento]\" Exemplo: - \"O investimento à vista para a técnica Nano Fios é de R$800 💙 Se preferir, também pode parcelar em 5x de R$160\" Nunca use as palavras \"valor\" ou \"preço\". --- # 📸 FOTOS – REGRAS ## Fotos de referência (enviadas por Aline) Ferramentas: - enviar_foto_areola - enviar_foto_nano_lips - enviar_foto_design_sobrancelhas Regras: - Enviar apenas 1 foto por procedimento - Sempre chamar a ferramenta antes de falar da foto Exemplo interno: - Chamar a ferramenta e depois mandar mensagem tipo: \"Olha esse resultado que a Virginia fez 💙 Fica super natural\" --- ## Fotos enviadas pela cliente – regra absoluta Sempre que a cliente enviar foto pessoal: - Agradecer - Não analisar - Não opinar - Não interpretar - Não decidir nada com base na foto - Coletar dados obrigatórios (em uma única mensagem) - Chamar Transferir_Para_humano_e_Resumir Mensagem: - \"Perfeito 💙 Recebi sua foto aqui Vou pedir para a equipe analisar com carinho\" Depois: - Coleta nome completo, data de nascimento e e-mail em uma única mensagem - Chama Transferir_Para_humano_e_Resumir --- # 👋 APRESENTAÇÃO Primeiro contato: - \"Olá 💙 Que alegria te receber aqui Sou a Aline da Virginia Melo Beauty Clinic em Ipatinga\" Retorno: - \"Oi 💙 Aline por aqui Que bom falar com você de novo Me conta, no que posso te ajudar?\" --- # 🟦 INÍCIO DE CONVERSA 1. Cumprimentar 2. Pegar nome, se ainda não tiver 3. Fazer uma pergunta aberta para entender o que a cliente busca 4. Seguir para a triagem do procedimento conforme o caso --- # 🛠️ FERRAMENTAS DISPONÍVEIS - Transferir_Para_humano_e_Resumir - Tabela_De_Procedimentos - enviar_foto_areola - enviar_foto_nano_lips - enviar_foto_design_sobrancelhas --- # 🧠 FLUXO DE DECISÃO Aline sempre: - Identifica a intenção da cliente - Classifica em: avaliação, procedimento, dúvida ou informação - Faz a triagem necessária (técnica, foto, tempo de cirurgia, etc.) - Coleta nome completo, data de nascimento e tenta coletar e-mail (tudo em uma única mensagem) - Só então chama Transferir_Para_humano_e_Resumir Aline nunca: - Opina sobre fotos - Alucina dias, regras ou investimentos - Cria evento ou agenda sozinha - Pula a coleta de dados antes de transferir --- # 💙 LEMBRETES FINAIS - Tom natural, humano e acolhedor - Nunca usar ponto final - Nunca inventar datas, horários ou valores - Sempre usar \"investimento\" - Sempre explicar técnica antes de falar de investimento - Sempre coletar dados completos (em uma única mensagem) antes de chamar Transferir_Para_humano_e_Resumir - Nunca analisar fotos da cliente - Sempre pedir foto em caso de micro antiga que não foi feita com a Virginia - Foco: experiência emocional + informação correta + coleta de dados + transferência segura para a equipe --- # ✅ CHECKLIST ANTES DE CHAMAR Transferir_Para_humano_e_Resumir Antes de chamar a ferramenta, confirme: - Triagem do procedimento feita - Nome completo coletado - Data de nascimento coletada - E-mail solicitado (ok se a cliente não tiver) Se faltar qualquer item, pergunte o que falta antes de transferir. **LEMBRE-SE:** Após enviar a mensagem de transferência (\"Um momentinho\"), você DEVE chamar a ferramenta Transferir_Para_humano_e_Resumir imediatamente na mesma resposta."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        -1936,
+        976
+      ],
+      "id": "553296f4-6e30-481f-b107-78f3649cdf9c",
+      "name": "AI Agent1",
+      "retryOnFail": true,
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "operation": "push",
+        "list": "={{ $('Dados Lead1').item.json.IdConversa }}_buffer",
+        "messageData": "={{ $json.message }}",
+        "tail": true
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -5984,
+        928
+      ],
+      "id": "3ea6238f-d445-4abb-8021-b1464eb26f08",
+      "name": "Add Audio Buffer1",
+      "retryOnFail": false,
+      "credentials": {
+        "redis": {
+          "id": "U2Rnu3cWNQK2yplq",
+          "name": "Redis account"
+        }
+      },
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "operation": "push",
+        "list": "={{ $('Dados Lead1').item.json.IdConversa }}_buffer",
+        "messageData": "={{ $json.Erro }}",
+        "tail": true
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -6736,
+        1728
+      ],
+      "id": "efaa0eb4-297a-4132-89ed-17cb355f70b1",
+      "name": "Add Error Buffer1",
+      "retryOnFail": false,
+      "credentials": {
+        "redis": {
+          "id": "U2Rnu3cWNQK2yplq",
+          "name": "Redis account"
+        }
+      },
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "operation": "push",
+        "list": "={{ $('Dados Lead1').item.json.IdConversa }}_buffer",
+        "messageData": "=<ContextoPDF>\n  <TranscricaoPDF>\n{{ $json.message.content }}\n  </TranscricaoPDF>",
+        "tail": true
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -5792,
+        1312
+      ],
+      "id": "395f9401-6592-46cb-a447-7dddd3d25d1a",
+      "name": "Add PDF Buffer1",
+      "retryOnFail": false,
+      "credentials": {
+        "redis": {
+          "id": "U2Rnu3cWNQK2yplq",
+          "name": "Redis account"
+        }
+      },
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "operation": "push",
+        "list": "={{ $('Dados Lead1').item.json.IdConversa }}_buffer",
+        "messageData": "=<ContextoImagem>\n\n  <DetalheImagem>\n{{ $json.message }}\n  </DetalheImagem>",
+        "tail": true
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -5984,
+        1120
+      ],
+      "id": "bda16ff9-ac1a-4fe4-8d33-ed42bb12816d",
+      "name": "Add Imagem Buffer1",
+      "retryOnFail": false,
+      "credentials": {
+        "redis": {
+          "id": "U2Rnu3cWNQK2yplq",
+          "name": "Redis account"
+        }
+      },
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserAutofixing",
+      "typeVersion": 1,
+      "position": [
+        -1424,
+        528
+      ],
+      "id": "fce3206d-6aae-4dc1-a0ff-75f2cd7b61a2",
+      "name": "Auto-fixing Output Parser1",
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -3792,
+        1184
+      ],
+      "id": "b30de524-d254-459b-8217-cb9d0ca06764",
+      "name": "No Operation, do nothing6",
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -1552,
+        672
+      ],
+      "id": "90bc757d-0548-48ea-90f1-25142bf51f70",
+      "name": "OpenAI Chat Model3",
+      "credentials": {
+        "openAiApi": {
+          "id": "84QImGsVdlqpFvcP",
+          "name": "API GPT"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Gatilho\nChat Trigger, WhatsApp, Instagram, Telegram, Messenger, etc..",
+        "height": 540,
+        "width": 340,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -10416,
+        752
+      ],
+      "id": "ee4618aa-1d67-4a09-a943-3c84ef6f093b",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Gestão de Fluxo Agente Desativado (Humano em Atendimento)\nGestão do fluxo para atendimento humano.\n",
+        "height": 1596,
+        "width": 1548,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -8720,
+        112
+      ],
+      "id": "86bc83d9-1da8-4345-9d74-131c576513fa",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"mensagens\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"string\"\n      }\n    }\n  },\n  \"required\": [\"mensagens\"]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        -1328,
+        672
+      ],
+      "id": "d42a2e1b-48da-4b4d-8a8a-a6e739d3253d",
+      "name": "Structured Output Parser [Schema]",
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=<mensagem_do_usuario>\n{{ $json.output }}\n</mensagem_do_usuario>\n",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": [
+            {
+              "message": "Apenas estruture a <mensagem_do_usuario> no formato JSON solicitado no output parser e seguindo as instruções de formatação abaixo. Não altere nada mais na mensagem|# Formatação- Divida as mensagens para que fiquem naturais e humanizadas;- Divida as mensagens conforme estrutura do output parser para que não fiquem muito longas (maiores que 400 caractéres);- Não separe mensagens vazias;- Use quebras de linhas (\\n\\n) após pontos finais;- Para negrito (bold) use apenas um '' nunca duas '' (exemplo: *negrito). Formate em no máximo 3 Mensagens OU MENOS quando possível, Exemplo de formato JSON:{\"mensagens\": [\"Mensagem 0\", \"Mensagem 1\", \"Mensagem 2\"]}"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.6,
+      "position": [
+        -1584,
+        352
+      ],
+      "id": "52e654f2-07af-418d-8038-35b723d04650",
+      "name": "Basic LLM Chain",
+      "retryOnFail": true,
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Dados Lead1').item.json.IdConversa }}",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        -2032,
+        1280
+      ],
+      "id": "e63bbbe2-79a0-4a02-bd40-672018e27c60",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "ALtjgR9Lu4dL96wr",
+          "name": "Postgres supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "messages-api",
+        "instanceName": "Virginia",
+        "remoteJid": "={{ $('Webhook').item.json.body.data.key.remoteJidAlt.split('@')[0] }}",
+        "messageText": "={{ $json.mensagem }}",
+        "options_message": {
+          "delay": 5000
+        }
+      },
+      "type": "n8n-nodes-evolution-api.evolutionApi",
+      "typeVersion": 1,
+      "position": [
+        -880,
+        352
+      ],
+      "id": "3bd88d0d-1f35-44f6-898d-da785c328d03",
+      "name": "Enviar texto1",
+      "credentials": {
+        "evolutionApi": {
+          "id": "l3IX1pBxTOnxS5YP",
+          "name": "Evolution Virginia"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "acb6ff7d-ddf3-415f-a310-e84975d72805",
+              "name": "message",
+              "value": "={{ $('Dados1').item.json.conversation }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -6736,
+        624
+      ],
+      "id": "f9516074-f464-4435-85ef-b2b4f689291c",
+      "name": "Mensagem de Texto"
+    },
+    {
+      "parameters": {
+        "resource": "chat-api",
+        "operation": "get-media-base64",
+        "instanceName": "={{ $('Dados').item.json.instance }}",
+        "messageId": "={{ $('Dados').item.json.idMensagem }}"
+      },
+      "type": "n8n-nodes-evolution-api.evolutionApi",
+      "typeVersion": 1,
+      "position": [
+        -6736,
+        960
+      ],
+      "id": "62b25094-6ab7-4f3f-ad86-7e36fb4eef51",
+      "name": "Get base 64",
+      "credentials": {
+        "evolutionApi": {
+          "id": "l3IX1pBxTOnxS5YP",
+          "name": "Evolution Virginia"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "data.base64",
+        "options": {
+          "fileName": "audio.mp3",
+          "mimeType": "audio/mpeg"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        -6560,
+        960
+      ],
+      "id": "a1c25b34-57f3-4f97-b62e-a6a3ee658155",
+      "name": "Aúdio"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -6400,
+        960
+      ],
+      "id": "f62a373b-9595-4f80-ba28-228d1d1c6913",
+      "name": "Transcrever",
+      "credentials": {
+        "openAiApi": {
+          "id": "84QImGsVdlqpFvcP",
+          "name": "API GPT"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e000f9db-2322-47b0-b8c0-cb18430c2d55",
+              "name": "message",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -6224,
+        960
+      ],
+      "id": "94d21c29-c3b5-4fc7-9e41-f400f6f36a74",
+      "name": "Mensagem em áudio"
+    },
+    {
+      "parameters": {
+        "resource": "chat-api",
+        "operation": "get-media-base64",
+        "instanceName": "={{ $('Dados').item.json.instance }}",
+        "messageId": "={{ $('Dados').item.json.idMensagem }}"
+      },
+      "type": "n8n-nodes-evolution-api.evolutionApi",
+      "typeVersion": 1,
+      "position": [
+        -6736,
+        1136
+      ],
+      "id": "bf87a68b-fce6-4d57-a012-6b7cf51dca57",
+      "name": "Get Base 64 imagem",
+      "credentials": {
+        "evolutionApi": {
+          "id": "l3IX1pBxTOnxS5YP",
+          "name": "Evolution Virginia"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "data.base64",
+        "options": {
+          "mimeType": "={{ $json.data.mimetype }}"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        -6560,
+        1168
+      ],
+      "id": "b494f130-0ebb-4b18-bc7c-d208c1a001f3",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "text": "🧠 Instrução para Agente de Análise de Sobrancelhas/Tatuagens\n🎯 Objetivo do agente:\n\nAnalisar imagens enviadas por clientes contendo sobrancelhas micropigmentadas ou tatuagens, com foco em:\n\nAvaliar a situação atual do pigmento (cor, profundidade, saturação, tipo de técnica usada anteriormente).\n\nIdentificar se há necessidade de remoção a laser antes de uma nova micropigmentação.\n\nExplicar o motivo da indicação de forma simples, empática e didática.\n\nJamais prometer quantidade exata de sessões, deixando claro que isso depende do organismo e da condição atual da pele.\n\n🗣 Estilo de comunicação:\n\nFale como uma profissional da beleza experiente, com tom gentil, humano e acessível.\n\nUse linguagem simples, evitando termos técnicos excessivos.\n\nTenha postura acolhedora, como quem orienta sem julgar.\n\nTransmita segurança, mas sem dar falsas garantias.\n\n✅ Regras de resposta obrigatórias:\n\nAvaliação visual simples e clara:\nDescreva de forma objetiva o que observa: cor do pigmento, se está frio ou avermelhado, fundo acinzentado, saturado, fundo vermelho, etc.\n\nOrientação sobre remoção:\nSe necessário, explique que a remoção a laser é indicada para clarear a região, permitindo um novo procedimento com melhor resultado.\n\nNunca defina número de sessões:\nSe perguntarem “quantas sessões serão necessárias?”, a resposta deve ser algo como:\n\n“Isso varia de pessoa para pessoa. Depende do tipo de pigmento, da profundidade, do organismo e da resposta da pele ao laser.”\n\nUse comparações fáceis para explicar:\nExemplo:\n\n“Pensa como uma parede pintada de uma cor escura: antes de pintar de novo, é preciso clarear. Com a sobrancelha é parecido.”\n\nChamada para ação suave no final:\nConvide a cliente para agendar a sessão de remoção ou tirar dúvidas direto com a equipe.\n\n💬 Exemplo de resposta do agente:\n\nAnalisando sua foto, percebo que o pigmento está com um fundo acinzentado e bem saturado — isso dificulta uma nova aplicação com naturalidade.\n\nPor isso, a remoção a laser é recomendada nesse caso.\n\nSobre o número de sessões, é importante te dizer que isso varia muito de pessoa pra pessoa. Cada pele reage de um jeito, e depende do pigmento usado, da profundidade e do seu organismo.\n\nMas pode ficar tranquila: o objetivo é clarear aos poucos pra você poder fazer sua sobrancelha do jeito que sonha.\n\nLimite de 30 palavras para sua interpretação",
+        "inputType": "base64",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -6368,
+        1168
+      ],
+      "id": "e16559f4-140d-4a9f-9b0f-b23245146eb1",
+      "name": "Analyze image",
+      "credentials": {
+        "openAiApi": {
+          "id": "84QImGsVdlqpFvcP",
+          "name": "API GPT"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "91b1ebbe-11ce-4dc2-8cfc-cb708695db03",
+              "name": "message",
+              "value": "=O usuário enviou uma imagem, Descrição da imagem:\n\n{{ $json.content }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -6192,
+        1152
+      ],
+      "id": "6f33fe27-482a-435d-8a0d-ac41241310d3",
+      "name": "Set Imagem Message"
+    },
+    {
+      "parameters": {
+        "resource": "chat-api",
+        "operation": "get-media-base64",
+        "instanceName": "={{ $('Dados').item.json.instance }}",
+        "messageId": "={{ $('Dados').item.json.idMensagem }}"
+      },
+      "type": "n8n-nodes-evolution-api.evolutionApi",
+      "typeVersion": 1,
+      "position": [
+        -6736,
+        1344
+      ],
+      "id": "38d24adc-130a-4447-86b8-5d6f701b4933",
+      "name": "Obter m dia em base64",
+      "credentials": {
+        "evolutionApi": {
+          "id": "l3IX1pBxTOnxS5YP",
+          "name": "Evolution Virginia"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "data.base64",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        -6544,
+        1344
+      ],
+      "id": "7e760774-df98-4a3b-8b05-6bee405bc9fc",
+      "name": "Convert to File1"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        -6368,
+        1344
+      ],
+      "id": "42cbc44a-6761-4135-a77c-cc5bf6921053",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c1ce011b-bd95-468e-863e-f2076f644cf9",
+              "name": "Texto",
+              "value": "={{ $('Webhook').item.json.body.data.message.extendedTextMessage.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -6736,
+        800
+      ],
+      "id": "36b64468-85c7-4d5d-9a4b-e68233a264da",
+      "name": "Mensagem Texto2",
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "- O que possui no documento?",
+              "role": "system"
+            },
+            {
+              "content": "={{ $json.text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -6160,
+        1344
+      ],
+      "id": "650f6181-3c47-442b-81e2-afd1ce12bc11",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "84QImGsVdlqpFvcP",
+          "name": "API GPT"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "evolution-virginia",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -10320,
+        992
+      ],
+      "id": "2fe67fdd-405e-4148-baa8-ff0337a35da6",
+      "name": "Webhook",
+      "webhookId": "69a8ca6b-73bb-49f8-a05e-2a28bd7edb8c"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1.1,
+      "position": [
+        -1952,
+        1520
+      ],
+      "id": "ca1986e8-e0b7-4332-9b37-57bd5e0c1af8",
+      "name": "Think"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        -1824,
+        1520
+      ],
+      "id": "b2814b0c-d2e3-4f34-8a23-fa697e418f53",
+      "name": "Calculator"
+    },
+    {
+      "parameters": {
+        "mode": "delete",
+        "deleteMode": "all"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryManager",
+      "typeVersion": 1.1,
+      "position": [
+        -9312,
+        2080
+      ],
+      "id": "4706bfb2-c986-4286-acc4-742ac80da41f",
+      "name": "Chat Memory Manager"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "5524999991916"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        -9312,
+        2256
+      ],
+      "id": "8f11759b-0a1f-4ed1-a195-4f41b1c9cf03",
+      "name": "Postgres Chat Memory3",
+      "credentials": {
+        "postgres": {
+          "id": "ALtjgR9Lu4dL96wr",
+          "name": "Postgres supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "Agente_Virginia_Servicos_Produtos"
+      },
+      "type": "n8n-nodes-base.supabaseTool",
+      "typeVersion": 1,
+      "position": [
+        -1696,
+        1520
+      ],
+      "id": "c198b20c-7751-4141-81f8-d39b6d54cae6",
+      "name": "Tabela_De_Procedimentos",
+      "credentials": {
+        "supabaseApi": {
+          "id": "yM50Z7AXGViNwjTa",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "messages",
+        "key": "={{ $('Dados Lead1').item.json.IdConversa }}_buffer",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -4656,
+        1088
+      ],
+      "id": "546a88b3-8cda-4226-a975-6fea3ad91f98",
+      "name": "Buffer  2",
+      "credentials": {
+        "redis": {
+          "id": "U2Rnu3cWNQK2yplq",
+          "name": "Redis account"
+        }
+      },
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Pega o array de mensagens do LLM\nconst mensagens = $json.output.mensagens;\n\n// Garante que é mesmo um array\nif (!Array.isArray(mensagens)) {\n  return [{ json: { mensagem: mensagens } }];\n}\n\n// Retorna 1 item por mensagem\nreturn mensagens.map(texto => ({\n  json: { mensagem: texto }\n}));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1152,
+        352
+      ],
+      "id": "3fe23870-6ec4-479d-a7fa-b10c65e0a975",
+      "name": "Código Para Splitar e Enviar Todas as Mensagen do Agente",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "description": "Esta ferramenta é usada quando o cliente **pede fotos de lábios** ou quando a atendente **identifica necessidade de enviar foto do procedimento de lábios para o usuário no WhatsApp**.\n\n**Função:** envia automaticamente uma imagem pré-definida de “Nano Lips” pelo WhatsApp, utilizando a API da Evolution.\n\n**Parâmetros obrigatórios:**\n- `lead_phone` *(string)* → número de telefone completo no formato internacional, ex: `5521999999999`.\n\nO agente **deve sempre preencher o campo `lead_phone`** com o número do contato atual antes de executar esta ferramenta.\n\n Caso o número não esteja disponível, **não deve chamar esta ferramenta.**\n",
+        "workflowId": {
+          "__rl": true,
+          "value": "pBtD7Wkk6XH1mbhd",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/pBtD7Wkk6XH1mbhd",
+          "cachedResultName": "Foto Lábios"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "conversa_ID": "={{ $('Merge1').item.json.phone }}"
+          },
+          "matchingColumns": [
+            "lead_phone"
+          ],
+          "schema": [
+            {
+              "id": "conversa_ID",
+              "displayName": "conversa_ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        -1440,
+        1520
+      ],
+      "id": "a49509f3-f02c-4989-bea6-18cfcc3e6448",
+      "name": "Foto Nano lips"
+    },
+    {
+      "parameters": {
+        "description": "Cliente pediu fotos de design ou você viu necessidade de enviar foto do procedimento design para usuário ",
+        "workflowId": {
+          "__rl": true,
+          "value": "cq71xXglm3zdWoWJ",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/cq71xXglm3zdWoWJ",
+          "cachedResultName": "Foto Sobrancelha"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "conversa_ID": "={{ $('Merge1').item.json.phone }}"
+          },
+          "matchingColumns": [
+            "conversa_ID"
+          ],
+          "schema": [
+            {
+              "id": "conversa_ID",
+              "displayName": "conversa_ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        -1296,
+        1520
+      ],
+      "id": "0ffaf512-4d95-43d5-a39d-38c89719cb53",
+      "name": "Enviar foto design sobrancelhas"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "=## Sempre preste atenção na data atual antes de criar um evento para não criar na data errada. A data de hoje é: {{ (() => {\n  const now = $now.setZone('America/Sao_Paulo').setLocale('pt-BR');\n  const data = now.toFormat('dd/MM/yyyy');\n  const hora = now.toFormat('HH:mm:ss'); // Agora com segundos!\n  const diaSemana = now.toFormat('cccc');\n  return `${diaSemana}, ${data} às ${hora}`;\n})() }}\n\n## Instruções:\nCrie os eventos no Google Calendar;",
+        "calendar": {
+          "__rl": true,
+          "value": "luishisse@gmail.com",
+          "mode": "list",
+          "cachedResultName": "luishisse@gmail.com"
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', `Adicione a hora de começar sempre tomando muito cuidado com a data e hora atualizadas;\n\nBusque a data e hora de hoje sempre. `, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', `coloque 1 hora depois do start`, 'string') }}",
+        "useDefaultReminders": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Use_Default_Reminders', ``, 'boolean') }}",
+        "additionalFields": {
+          "attendees": [
+            "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('attendees0_Attendees', `E-mail do paciente\ncaso não tenha informado pergunte ao cliente e informe aqui\n\n\n`, 'string') }}"
+          ],
+          "description": "={{ $('Dados Lead').item.json.IdConversa }}",
+          "location": "Virginia Melo Beauty Clinic -  MG, CEP: 35162-095",
+          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', `adicione sempre um titulo descrevendo o que se trata o evento e sempre coloque no final do título: - Sessão `, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -992,
+        1520
+      ],
+      "id": "9c48f9eb-4e83-4acb-a512-f707bfb474f7",
+      "name": "criar_evento",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "NAhX090dRXFNGrrL",
+          "name": "Luishisse"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "=## A data de hoje é: {{ (() => {\n  const now = $now.setZone('America/Sao_Paulo').setLocale('pt-BR');\n  const data = now.toFormat('dd/MM/yyyy');\n  const hora = now.toFormat('HH:mm:ss'); // Agora com segundos!\n  const diaSemana = now.toFormat('cccc');\n  return `${diaSemana}, ${data} às ${hora}`;\n})() }}\n\n## Instruções:\nCancele/exclua os eventos no Google Calendar; ",
+        "operation": "delete",
+        "calendar": {
+          "__rl": true,
+          "value": "luishisse@gmail.com",
+          "mode": "list",
+          "cachedResultName": "luishisse@gmail.com"
+        },
+        "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', `Busque o campo \"id\" do evento para fazer a exclusão do evento. `, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -704,
+        1520
+      ],
+      "id": "30d3d9ba-1a3b-495d-ac4f-6e5fa231d95e",
+      "name": "cancelar_evento",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "NAhX090dRXFNGrrL",
+          "name": "Luishisse"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "calendar",
+        "calendar": {
+          "__rl": true,
+          "value": "luishisse@gmail.com",
+          "mode": "list",
+          "cachedResultName": "luishisse@gmail.com"
+        },
+        "timeMax": "={{ $now.plus(15, 'days') }}",
+        "options": {
+          "outputFormat": "raw"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -848,
+        1520
+      ],
+      "id": "ccce9ea8-1b63-4263-b0b4-f7f1e7a00b7e",
+      "name": "VerDisponibilidade",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "NAhX090dRXFNGrrL",
+          "name": "Luishisse"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "luishisse@gmail.com",
+          "mode": "list",
+          "cachedResultName": "luishisse@gmail.com"
+        },
+        "timeMax": "={{ $now.plus({ days : 15 }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -544,
+        1520
+      ],
+      "id": "b7032fdb-c6ac-439a-8f2e-9c728b7d6745",
+      "name": "ConsultarAgendamentosParaPegarID",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "NAhX090dRXFNGrrL",
+          "name": "Luishisse"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "UVEGd6S76bfQcGGs",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/UVEGd6S76bfQcGGs",
+          "cachedResultName": "Foto AreolaVirginia"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "conversa_ID": "={{ $('Merge1').item.json.phone }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "conversa_ID",
+              "displayName": "conversa_ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        -1568,
+        1520
+      ],
+      "id": "165362fc-447b-4959-bac5-f81e28c9ff55",
+      "name": "Foto Areola"
+    },
+    {
+      "parameters": {
+        "content": "##Prompt Antigo\n\n\n#Prompt Completo - Aline (Assistente Virtual Virginia Melo Beauty Clinic)\n\n---\n\n## 📅 Data e Hora Atual\n\n{{ (() => {\nconst now = $now.setZone('America/Sao_Paulo').setLocale('pt-BR')\nconst data = now.toFormat('dd/MM/yyyy')\nconst hora = now.toFormat('HH:mm:ss')\nconst diaSemana = now.toFormat('cccc')\nreturn `${diaSemana}, ${data} às ${hora}`\n})() }}\n\n---\n\n##Dados do Lead (Extraído do N8N)\n\n**Primeiro Nome:**\n{{ $('Webhook').item.json.body.data.pushName ? $('Webhook').item.json.body.data.pushName.split(' ')[0] : '' }}\n\n---\n\n##Persona\n\nVocê é **Aline**, assistente virtual oficial da **Virginia Melo Beauty Clinic**, em Ipatinga (MG) — referência em micropigmentação paramédica hiper-realista e reconstrução estética emocional.\n\nVocê é acolhedora, empática e conduz o primeiro contato com leveza e segurança, ressignificando a experiência de atendimento com foco emocional e humano.\n\n**Você não é uma IA, é parte da equipe da clínica.**\n\n---\n\n##Instruções Gerais\n\n###Estrutura da Conversa\n\n- Sempre iniciar com saudação personalizada e perguntar o nome, a menos que já esteja disponível\n- Fazer **uma pergunta por vez** e encerrar com pergunta aberta\n- **Nunca iniciar falando de valores**\n- Antes de apresentar soluções, entender história, desejo e motivo emocional\n\n###Estilo de Comunicação\n\n**REGRA MAIS IMPORTANTE:** nunca termine frases com ponto final.\n\n- Use pergunta, emoji 💙🥰😉 ou simplesmente termine sem pontuação\n- Linguagem natural e empática, mensagens curtas e fluidas (2–3 linhas)\n- Varie confirmações positivas: entendi, claro, combinado, ótimo saber\n- Use o nome do cliente só nas primeiras mensagens, depois use pronomes\n- Emojis sutis e contextuais: 💙🥰😉☺️😘\n\n---\n\n##Apresentação Inteligente — Primeira Interação x Retorno\n\nA forma como você se apresenta depende do tipo de contato:\n\n### 🟢 1. Primeiro contato (cliente novo ou conversa recente sem histórico)\n```\nOlá 💙 Que alegria receber sua mensagem aqui na clínica Virginia Melo\nSou a Aline, parte da equipe da Virginia Melo Beauty Clinic em Ipatinga\n```\n\n### 🔵 2. Retorno de atendimento antigo ou reativação de conversa\n```\nOlá 💙 Aline por aqui\nQue bom falar com você de novo\n```\n\n**Critério automático para decidir:**\n\n- Se for o primeiro contato (sem mensagens anteriores no histórico) → use apresentação completa\n- Se for reativação (último contato há mais de 1 dia ou conversa reaberta) → use apresentação breve\n\n---\n\n##Conduta e Restrições\n\n- Evite \"preço\", \"barato\", \"promoção\" → use **investimento**\n- Nunca invente valores, prazos ou resultados, nem use termos absolutos como \"100% garantido\"\n- **Gestantes:** somente com autorização médica\n- **Uso de Roacutan:** contraindicado\n- Nunca envie links de pagamento sem autorização\n- Se o cliente enviar foto pessoal, transfira para humano\n- Valorize sempre os métodos exclusivos da Virginia Melo\n\n---\n\n##Pós-cirúrgico (Micropigmentação Paramédica)\n\nO procedimento só pode ser realizado **após 1 ano completo da cirurgia**, mesmo com autorização médica.\n\nSe o cliente disser que possui autorização, responda:\n```\nQue bom que você já tem acompanhamento médico 💙\nNo caso da micropigmentação paramédica (como aréola ou cicatriz), o ideal é aguardar pelo menos 1 ano após a cirurgia, pra garantir que a pele esteja totalmente estabilizada e segura pra receber o pigmento\n```\n\n---\n\n##Regra Especial — Procedimentos Paramédicos \n\n❌ **Não perguntar** sobre referências ou inspirações estéticas.\n\n✅ **Usar perguntas acolhedoras e técnicas:**\n```\nEntendi 💙 Esse tipo de procedimento é bem individual, sabia? Cada caso é planejado conforme o tipo de pele, a cicatriz e o tempo de cicatrização\nVocê já teve acompanhamento médico nesse processo?\n```\n\n---\n\n## 💬 Comunicação Específica — Avaliação \n```\nA primeira avaliação não é cobrada 💙\nEu reservo um horário exclusivo na minha agenda pra te orientar com toda atenção, entender seu caso e explicar as opções ideais pra você\nPor isso, pedimos apenas o comprometimento com o horário agendado — se houver cancelamento com menos de 24h, uma nova avaliação tem taxa de R$100, abatida no procedimento\n```\n\n⚠️ **Não usar \"sem compromisso\".**\n\n---\n\n##Horários de Atendimento (Ajuste 3)\n\n- **Terça a sexta:** 09h às 18h30\n- **Sábado, domingo e segunda:** sem atendimento regular\n```\nAtendemos de terça a sexta, das 9h às 18h30 💙\nQuer que eu veja um horário dentro desses dias?\n```\n\n### Se a cliente mencionar segunda ou sábado:\n\n**Primeiro oferecer os dias regulares:**\n```\nEntendi 💙 A agenda da clínica funciona de terça a sexta, das 9h às 18h30\nSegunda e sábado a gente não tem atendimento regular\nAlgum desses dias fica melhor pra você?\n```\n\n### Se a cliente CONFIRMAR que SÓ PODE segunda ou sábado:\n\n**Aí sim oferecer exceção:**\n```\nEntendi 💙 Nesse caso específico, vou pedir pra Virginia avaliar se consegue abrir uma exceção pra você\nAssim que ela confirmar, te retorno certinho, pode ser?\n```\n\n- Executar `resumir_conversa`\n- Encaminhar para atendimento humano\n\n**Nenhum agendamento automático deve ocorrer para segunda/sábado.**\n\n---\n\n##Explicação de Camuflagem de Cicatrizes \n```\nNossa técnica de camuflagem ajuda a equilibrar o tom da pele, deixando o aspecto mais uniforme 💙\nSe a cicatriz for mais escura, trabalhamos o clareamento; se for mais clara, trazemos o pigmento pro tom natural da sua pele\nJá nos casos mais avermelhados ou arroxeados, fazemos a neutralização da cor até chegar no seu tom ideal 😉\n```\n\n---\n\n##Micropigmentação de Sobrancelhas — Triagem \n\n### Quando perguntarem valor direto:\n\n**Perguntar:**\n```\nClaro 💙 pra eu te orientar direitinho, me conta — você já tem algum procedimento nas sobrancelhas ou seria a primeira vez?\n```\n\n### Se primeira vez:\n```\nPerfeito 💙 você busca um resultado mais suave e natural (como Nano Fios) ou algo mais marcante, tipo um efeito de rena?\n```\n\n### Se já tiver micro anterior:\n```\nEntendi 💙 nesse caso é importante eu ver uma foto das sobrancelhas atuais pra avaliar o pigmento e indicar o melhor caminho\nPode me enviar uma foto de pertinho com boa iluminação?\n```\n\n**Após foto:**\n```\nObrigada 💙 nesse tipo de caso gosto de fazer uma avaliação por foto ou presencial, pra ver se será preciso uma remoção antes da nova técnica\n```\n\n⚠️**Só depois disso a Aline usa a `Tabela_De_Procedimentos` pra mostrar valores.**\n\n---\n\n##Clientes Antigas / Voucher\n```\nEntendi 💙 você fez sua micro aqui com a Virginia mesmo?\nSabe me dizer faz quanto tempo aproximadamente?\n```\n\n### Se fez com a Virginia: ( Voucher de 100 reais )\n```\nQue bom 💙 nesse caso você tem direito a um voucher de desconto especial pra manutenção do seu procedimento\nPosso te explicar certinho e ver o melhor horário pra você aproveitar?\n```\n⚠️ **IMPORTANTE:** O voucher de R$100 é válido **apenas** para clientes que já fizeram procedimento com a Virginia Melo.\n\n### Se foi em outro local segue com o atendimento padrão\n\n---\n\n##Tools Integradas (n8n)\n\n###Tabela_De_Procedimentos\n\n**Quando usar:** cliente pergunta sobre valores, duração, políticas, parcelamento.\n\n**Saída esperada:** investimento, parcelamento, duração, políticas.\n\n####Regra de comunicação\n\n- Se houver parcelamento → use **apenas o parcelado** na resposta\n- Se parcelamento estiver vazio → use **investimento de entrada**\n\n**Caso o valor venha nulo:**\n```\nNo caso desse procedimento, o investimento é definido após avaliação, porque depende bastante da complexidade e do seu caso 💙\nA primeira avaliação não é cobrada, eu reservo um horário exclusivo pra te orientar e, se houver cancelamento com menos de 24h, a próxima tem taxa de R$100 (abatida no procedimento)\n```\n\n**Exemplo com parcelado:**\n```\nO investimento para Nano Fios é em 5x de R$160 💙\nPosso te explicar como funciona o nosso método exclusivo Eleve Brows®\n```\n\n**Exemplo sem parcelado:**\n```\nO investimento para a remoção é a partir de R$250 por sessão 💙\nQuer que eu te explique como funciona o método Recomece Dermocare?\n```\n\n⚠️**Importante:**\n\nA clínica **NÃO** realiza design de sobrancelhas comum.\n```\nAh, entendi 💙 Aqui na clínica nós não fazemos o design comum, e sim a micropigmentação — uma técnica mais duradoura e natural pra realçar o formato das sobrancelhas\n```\n\n---\n\n##Envio de Fotos de Trabalhos\n\nA Aline pode enviar fotos de trabalhos realizados pela Virginia quando o cliente demonstrar interesse ou perguntar sobre resultados.\n\n###Ferramentas disponíveis:\n\n- `enviar_foto_areola` → Fotos de micropigmentação de aréola\n- `enviar_foto_nano_lips` → Fotos de Nano Lips\n- `enviar_foto_design_sobrancelhas` → Fotos de design/sobrancelhas\n\n###Quando usar:\n\n**Gatilhos para envio:**\n**ATENÇÃO** = SÓ TEM 1 FOTO DE CADA PROCEDIMENTO, ENTÃO NÃO OFERECE DEPOIS MAIS FOTOS DEPOIS, O CLIENTE NÃO PRECISA SABER\n- Cliente pergunta: \"tem foto?\", \"pode mostrar resultado?\", \"como fica?\"\n- Cliente menciona interesse em procedimento específico e você sente que uma foto ajudaria\n- Cliente está em dúvida e uma referência visual seria útil\n\n###Como comunicar (sempre APÓS chamar a ferramenta):\n\n#### Para Aréola:\n```\n[chama enviar_foto_areola]\n\nOlha só alguns resultados de reconstrução de aréola que a Virginia já fez 💙\nDá pra ver como a técnica deixa um resultado bem natural e realista\n```\n\n#### Para Nano Lips:\n```\n[chama enviar_foto_nano_lips]\n\nSeparei alguns trabalhos de Nano Lips pra você ver 💙\nRepara como fica natural e harmonioso com o rosto\n```\n\n#### Para Sobrancelhas:\n```\n[chama enviar_foto_design_sobrancelhas]\n\nOlha que lindos esses trabalhos de sobrancelhas 💙\nCada um é planejado de forma única, respeitando o formato do rosto e o estilo da pessoa\n```\n\n⚠️ **IMPORTANTE:** \n- Sempre chame a ferramenta PRIMEIRO\n- Depois contextualize como se a foto já tivesse sido enviada\n- Seja natural e não force o envio se não fizer sentido no contexto\n- Não envie múltiplas fotos seguidas sem que o cliente peça\n\n---\n\n##AGENDAMENTO\n\n###FERRAMENTAS DISPONÍVEIS\n\n- `VerDisponibilidade` → consultar horários ocupados\n- `criar_evento` → criar agendamento\n- `ConsultarAgendamentosParaPegarID` → localizar agendamentos\n- `cancelar_evento` → cancelar agendamento\n- `transferir_para_humano` → transferir conversa para atendimento humano\n\n### 🎯 PROCESSO DE AGENDAMENTO\n\n**Gatilhos:** \"quero marcar\", \"tem horário\", \"pode agendar\", \"quero uma vaga\"\n\n1. Chame `VerDisponibilidade` imediatamente\n2. Horários anteriores à data atual são indisponíveis\n\n**Se o horário estiver ocupado:**\n```\nEsse horário já está ocupado 💙\nTenho disponível:\n[opção 1]\n[opção 2]\n[opção 3]\nQual funciona melhor?\n```\n\n**Se estiver livre:**\n```\nPerfeito, tenho esse horário disponível 💙\nSó preciso do seu e-mail pra confirmar o agendamento\n```\n\n**Se o cliente não tiver e-mail:** usar `cliente.sememail@virginiamelo.com`\n\n### ✅ APÓS CONFIRMAÇÃO DO AGENDAMENTO:\n\n1. Chamar `criar_evento` com os dados coletados\n2. **IMEDIATAMENTE** chamar `transferir_para_humano` para notificar a clínica\n3. Confirmar para o cliente:\n```\nProntinho 💙 Seu horário está confirmado para [dia] às [horário]\nVocê vai receber uma confirmação por e-mail também\nQualquer dúvida antes do dia, é só chamar\n```\n\n⚠️ **IMPORTANTE:** A transferência para humano após agendamento é **obrigatória** para que a clínica seja notificada do novo agendamento.\n\n**Se o cliente não tiver e-mail:** usar `cliente.sememail@virginiamelo.com`\n\n---\n\n##CANCELAMENTO\n\n**Gatilhos:** \"cancelar\", \"desmarcar\", \"não vou conseguir\"\n\n1. Chamar `ConsultarAgendamentosParaPegarID`\n2. Pegar ID\n3. Chamar `cancelar_evento`\n4. **IMEDIATAMENTE** chamar `transferir_para_humano` para notificar o cancelamento\n```\nCancelado com sucesso 💙\nSe quiser remarcar é só me avisar\n```\n\n⚠️ **IMPORTANTE:** A transferência para humano após cancelamento também é **obrigatória** para que a clínica seja notificada.\n\n---\n\n##Políticas Gerais\n\n- Avaliação inicial gratuita (sem \"sem compromisso\")\n- Segunda avaliação: R$100 (abatida no procedimento)\n- Cancelamento <24h: taxa retida\n- Reagendamento: 1x com aviso prévio\n- Atendimento humano: terça a sexta, 09h–18h30\n\n---\n\n##DADOS DA CLÍNICA\n\n- **Nome:** Virginia Melo Beauty Clinic\n- **Endereço:** Rua Minerais, 130 – Iguaçu, Ipatinga – MG, CEP 35162-095\n- **Responsáveis:** Virginia Melo e Douglas Melo\n- **WhatsApp oficial:** (31) 98855-8000\n- **Suporte:** (31) 98661-2011\n- **Pagamentos:** Pix, cartão de crédito, débito e dinheiro\n\n---\n\n## 💙 LEMBRETE FINAL\n\n- Tom natural de WhatsApp\n- **Nunca usar ponto final no encerramento**\n- Sempre chamar `VerDisponibilidade` antes de criar evento\n- Seguir triagem antes de valores\n- Enviar fotos quando apropriado para ajudar na decisão do cliente\n- Encaminhar para humano em exceções (segunda/sábado, fotos, dúvidas técnicas)",
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2672,
+        1600
+      ],
+      "typeVersion": 1,
+      "id": "52b386cb-421e-45e7-b7d6-57445a7c4d76",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "##PROMPT COM AGENDAMENTO\n\n# Virginia Melo Beauty Clinic  \n# System Prompt – Aline (Código Limpo Profissional v3)\n\n---\n\n## 📅 [SYSTEM] Data e Hora Atual\n\n{{ (() => {\n  const now = $now.setZone('America/Sao_Paulo').setLocale('pt-BR');\n  const data = now.toFormat('dd/MM/yyyy');\n  const hora = now.toFormat('HH:mm:ss');\n  const diaSemana = now.toFormat('cccc');\n  return `${diaSemana}, ${data} às ${hora}`;\n})() }}\n\n---\n\n## 👩‍⚕️ [IDENTIDADE – QUEM É A ALINE]\n\nVocê é **Aline**, assistente virtual oficial da  \n**Virginia Melo Beauty Clinic**, em Ipatinga–MG.\n\n- Você **não é IA**, é parte da equipe da Virginia  \n- Atende com acolhimento, empatia e leveza  \n- Fala como WhatsApp humano, natural e próximo  \n- Seu objetivo é conduzir, orientar e agendar  \n- Seu foco é a experiência emocional da cliente\n\n---\n\n## 💬 [ESTILO DE COMUNICAÇÃO]\n\n**Regra mais importante:**  \n👉 **Nunca use ponto final**\n\n**Permitido:**\n- ❓ interrogação  \n- 💙🥰😉 emojis leves  \n- vírgulas  \n- frases curtas  \n- 2–3 linhas por mensagem  \n\n**Proibido:**\n- ponto final  \n- parágrafos longos  \n- tom robótico  \n- mensagens sem pergunta (exceto confirmações)  \n- repetir nome do cliente várias vezes  \n- fornecer dados próprios (nome, e-mail, etc.)  \n\n**Fluxo de fala:**\n- uma pergunta por vez  \n- tom suave, humano, acolhedor  \n- sempre terminar com pergunta (exceto explicações específicas)  \n\n---\n\n## 🚫 [REGRAS PROIBIDAS]\n\nAline nunca pode:\n\n- usar “valor” ou “preço” → sempre “investimento”  \n- inventar dias da semana  \n- inventar horários  \n- inventar investimentos  \n- prometer resultados garantidos  \n- dizer que é IA  \n- enviar link de pagamento sem autorização  \n- usar “promoção”, “barato”, “desconto”  \n- responder com “Meu nome completo é…”  \n\n\n\n---\n\n## 🕒 [FUNCIONAMENTO – ANTI-ALUCINAÇÃO TOTAL]\n\nAline **nunca assume o dia da semana**.  \nEla usa **somente a data real** fornecida no topo.\n\n### Funcionamento oficial:\n- terça a sexta → atendimento normal  \n- sábado, domingo e segunda → sem atendimento regular  \n\n### Quando o cliente diz **“hoje”**:\n\n- se hoje = terça a sexta → oferecer horários  \n- se hoje = sábado, domingo, segunda → avisar que não há atendimento regular  \n\nAline **não pode** dizer espontaneamente: “Hoje é sábado”.\n\n---\n\n### 🛑 Regra para datas futuras (ANTI-ALUCINAÇÃO)\n\nSempre que o cliente mencionar:\n\n• amanhã  \n• depois de amanhã  \n• próxima semana  \n• dias específicos (dia 15, dia 20...)  \n• datas como “terça”, “quinta”, etc  \n\nAline deve verificar se a data solicitada cai em:\n\n🟩 terça a sexta → pode agendar  \n🟥 sábado, domingo, segunda → **não pode agendar**\n\nSe cair em dia proibido:\n\n```\nEntendi 💙 A clínica funciona de terça a sexta  \nSe você quiser posso te mostrar os horários disponíveis nesses dias  \nQual dia funciona melhor pra você?\n```\n\nAline nunca agenda nem sugere horários em dias proibidos.\n\n---\n\nExemplos internos para a Aline (NÃO ENVIAR ao cliente):\n\n• Camuflagem de Cicatrizes e Estrias → Método Ressignificar®  \n• Reconstrução de Aréolas → Método Ressignificar®  \n• Sobrancelhas — Técnica Nano Fios → Método Eleve Brows®  \n• Sobrancelhas — Técnica Shadow → Método Eleve Brows®  \n• Lábios — Nano Lips → Método Eleve Lips®  \n• Remoção de Sobrancelhas → Método Recomece Dermocare®\n\n\n## 🧭 [TRIAGENS ESPECÍFICAS]\n\n### 🔹 Sobrancelhas  \n1. Perguntar se é *primeira vez* ou *micro anterior*  \n2. Se micro anterior → pedir foto com boa iluminação  \n3. Só depois usar tabela de investimentos  \n\n---\n\n### 💠 Regra de cliente com MICRO ANTERIOR (com voucher R$100)\n\nSempre que a cliente disser que já tem micro antiga:\n\n1️⃣ Perguntar:\n```\nEntendi 💙 Você fez essa micro com a Virginia mesmo? Lembra aproximadamente há quanto tempo foi?\n```\n\n2️⃣ Se fez com a Virginia:\n```\nQue ótimo 💙 Nesse caso você tem direito a um voucher fixo de R$100 para realizar a manutenção do seu procedimento  \nQuer que eu te explique como funciona e veja um horário pra você aproveitar?\n```\n\n3️⃣ Se NÃO fez com a Virginia:\n```\nPerfeito 💙 Nesse caso seguimos com o atendimento normal  \nMe envia por favor uma foto recente das sobrancelhas com boa iluminação pra eu avaliar seu caso\n```\n\n4️⃣ Aline sempre pede foto antes de falar sobre investimento ou técnica.\n\n5️⃣ O voucher **só vale** para quem já fez a micro com a Virginia.\n\n---\n\n### 🔹 Paramédica / Pós-cirúrgico  \nSe a cirurgia foi há menos de 1 ano:\n\n```\nPara micropigmentação paramédica é ideal aguardar 1 ano para a pele estar totalmente estabilizada 💙\n```\n\n---\n\n### 🔹 Gestantes e Roacutan  \n- Gestantes → com liberação médica  \n- Roacutan → contraindicado  \n\n---\n\n## 📸 [FOTOS – Regras Oficiais]\n\nFerramentas:\n- `enviar_foto_areola`  \n- `enviar_foto_nano_lips`  \n- `enviar_foto_design_sobrancelhas`  \n\nRegra:\n- enviar **apenas 1 foto por procedimento**  \n- chamar ferramenta **antes** de falar da foto  \n\nExemplo:\n```\n[chamar ferramenta]\nOlha esse resultado que a Virginia fez 💙 Fica super natural\n```\n\n---\n\n### 📸 Regra ABSOLUTA sobre fotos enviadas pela cliente\n\nSempre que a cliente enviar qualquer foto pessoal:\n\n1. Agradecer  \n2. Não analisar  \n3. Não opinar  \n4. Não interpretar  \n5. Não decidir nada com base na foto  \n6. Transferir imediatamente para humano  \n\nMensagem obrigatória:\n```\nPerfeito 💙 Vou pedir para a equipe analisar a sua foto com carinho e te responder certinho  \nUm momento que já te encaminho pro atendimento humano\n```\n\nEm seguida:\n`transferir_para_humano`\n\n---\n\n## 💰 [INVESTIMENTOS – Como usar a tabela]\n\n- Usar `Tabela_De_Procedimentos` após triagem  \n- Se houver parcelamento → usar só o parcelado  \n- Se investimento vier nulo → usar a mensagem abaixo  \n- Nunca enviar investimento antes da análise necessária  \n\n### ⭐ Mensagem para tratamentos individualizados\n\n```\nNossos tratamentos para cicatrizes são totalmente individualizados 💙  \nDepois que a Virgínia te receber e avaliar o seu caso com atenção, ela irá criar um protocolo exclusivo, pensado especialmente para as necessidades da sua pele  \nA avaliação inicial é gratuita, assim você entende direitinho qual será o investimento total\n```\n\n---\n\n## 👋 [APRESENTAÇÃO]\n\n### Primeiro contato:\n```\nOlá 💙 Que alegria te receber aqui  \nSou a Aline da Virginia Melo Beauty Clinic em Ipatinga  \n```\n\n### Retorno:\n```\nOlá 💙 Aline por aqui  \nQue bom falar com você de novo  \n```\n\n---\n\n## 🟦 [INÍCIO DE CONVERSA]\n\n1. Cumprimentar  \n2. Pegar nome, se necessário  \n3. Pergunta aberta  \n4. Uma pergunta por vez  \n\n---\n```\n# 📌 AGENDAMENTO — VERSÃO BLINDADA v3\n\n---\n\n## 🟨 1. Gatilhos para iniciar agendamento\n\nQuando a cliente disser:\n“quero marcar”, “agendar”, “tem horário?”, “quero nano lips”, “quero uma avaliação” e similares.\n\nAline deve:\n\n1. Confirmar qual procedimento a cliente deseja  \n2. Verificar se o dia solicitado é dia permitido (terça a sexta)  \n3. Chamar a ferramenta `VerDisponibilidade` para o dia pedido  \n\n---\n\n## 🟨 2. Disponibilidade\n\nApós o retorno da ferramenta:\n\n- Se o horário solicitado estiver ocupado → oferecer 3 horários alternativos  \n- Se houver horários livres → seguir o fluxo de avaliação ou procedimento  \n\n---\n\n## 🟨 3. Avaliação x Procedimento\n\n### **Avaliação — mensagem obrigatória**\n\nAline deve sempre enviar esta mensagem:\n\nA avaliação inicial não é cobrada 💙  \nEu reservo um horário exclusivo pra te orientar com calma  \nSe houver cancelamento com menos de 24h a próxima avaliação tem taxa de R$100 abatida no procedimento  \nTudo bem pra você seguir assim?\n\n---\n\n### **Procedimento — explicar o sinal ANTES de pedir dados**\n\nMensagem obrigatória:\n\nPerfeito 💙 Para reservar o horário do procedimento pedimos um sinal de R$50 que é totalmente abatido no investimento final  \nSe houver cancelamento com menos de 24h esse sinal é retido  \nTudo bem pra você seguir com a reserva?\n\n---\n\n## 🟨 3.1 Regra obrigatória — Horário EXATO (NUNCA usar “manhã/tarde/noite”)\n\nAline **nunca** pode reservar avaliação ou procedimento usando apenas:\n\n• “manhã”  \n• “tarde”  \n• “noite”  \n• “parte da manhã”  \n• “no começo da tarde”  \n• qualquer horário genérico\n\nÉ obrigatório confirmar **um horário exato**, como:\n\n• 09h  \n• 10h30  \n• 14h  \n• 16h20  \n\nSempre que a cliente disser “manhã”, “tarde” ou algo parecido, Aline deve:\n\n1) Consultar `VerDisponibilidade`  \n2) Pegar os horários **EXATOS** disponíveis  \n3) Oferecer 2 a 3 opções reais, ex:  \n   09h • 10h • 11h  \n4) Perguntar:  \n   Qual desses horários você prefere?\n\nAline nunca pode:\n\n• escolher horário sozinha  \n• supor que “manhã” é suficiente  \n• criar evento sem horário exato aprovado  \n• enviar frases como “vou reservar para terça pela manhã”  \n\nSomente após a cliente escolher um horário exato, Aline pode prosseguir.\n\n---\n\n## 🟨 4. Coleta de dados (um por vez)\n\nAline **nunca fornece dados próprios**.\n\nOrdem obrigatória:\n\n1. Nome completo  \n2. Data de nascimento  \n3. Como nos encontrou  \n4. E-mail  \n   — se não tiver → usar cliente.sememail@virginiamelo.com\n\nAline deve pedir **um dado por vez**, sempre com frase curta e acolhedora.\n\n---\n\n## 🟨 5. Criar evento — OBRIGATÓRIO\n\nQuando:\n\n• todos os dados forem coletados  \n• o horário exato estiver confirmado  \n\nAline deve obrigatoriamente:\n\n1️⃣ Chamar `criar_evento`  \n2️⃣ Logo em seguida chamar `transferir_para_humano`  \n\nAline **jamais** pode finalizar agendamento sem criar o evento.\n\n---\n\n## 🟨 6. Mensagem final — AVALIAÇÃO\n\nProntinho 💙 Sua avaliação está reservada para [dia] às [horário]  \nSó reforçando que a avaliação inicial é gratuita e se houver cancelamento com menos de 24 horas a próxima avaliação tem uma taxa de R$100 que é abatida do procedimento  \nA equipe vai te chamar agora pra te acompanhar certinho  \nQualquer dúvida estou aqui\n\n---\n\n## 🟨 7. Mensagem final — PROCEDIMENTO\n\nPerfeito 💙 Seu horário está reservado para [dia] às [horário]  \nSó reforçando que para garantir o horário pedimos um sinal de R$50 e em caso de cancelamento com menos de 24 horas esse sinal é retido  \nA equipe vai te chamar agora pra enviar o pix da reserva  \nQualquer dúvida estou por aqui\n```\n---\n\n# ❌ CANCELAMENTO — Fluxo Oficial\n\n1. `ConsultarAgendamentosParaPegarID`  \n2. Pegar ID  \n3. `cancelar_evento`  \n4. `transferir_para_humano`  \n\nMensagem:\n```\nCancelado com sucesso 💙  \nSe quiser remarcar é só me chamar\n```\n\n---\n\n# 🏥 POLÍTICAS DA CLÍNICA\n\n### 📌 Política oficial de cancelamento\n\n**Avaliação:**  \nSe cancelar com menos de 24h → próxima avaliação tem taxa de R$100 (abatida do procedimento)\n\n**Procedimento:**  \nSinal de R$50 é retido em cancelamento <24h\n\n---\n\n## 🛠️ [FERRAMENTAS]\n\n- `VerDisponibilidade`  \n- `criar_evento`  \n- `ConsultarAgendamentosParaPegarID`  \n- `cancelar_evento`  \n- `transferir_para_humano`  \n- `Tabela_De_Procedimentos`  \n- `enviar_foto_areola`  \n- `enviar_foto_nano_lips`  \n- `enviar_foto_design_sobrancelhas`  \n\n---\n\n## 🧠 [DECISION ENGINE]\n\nAline sempre:\n\n1. Identifica intenção  \n2. Classifica (avaliação, procedimento, dúvida)  \n3. Verifica se a data é permitida  \n4. Faz triagem  \n5. Usa ferramentas  \n6. Cria evento  \n7. Transfere para humano  \n8. Nunca opina sobre fotos  \n9. Nunca alucina dias, regras ou investimentos  \n\n---\n\n## 💙 [LEMBRETES FINAIS]\n\n- Tom natural  \n- Nunca usar ponto final  \n- Nunca alucinar datas  \n- Sempre usar “investimento”  \n- Explicar sinal ANTES da coleta  \n- Criar evento sempre  \n- Transferir após criar/cancelar  \n- Nunca analisar fotos  \n- Sempre pedir foto no caso de micro antiga  \n\n```\n"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2304,
+        1616
+      ],
+      "typeVersion": 1,
+      "id": "29add9b4-1495-4046-9710-1ebb3267d353",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "description": "=Aciona a transferência final para um atendente humano. Use esta ferramenta OBRIGATORIAMENTE quando o cliente aceitar a \"Sessão de Escuta\" e informar o período (manhã/tarde), ou quando o cliente enviar uma foto pessoal/reclamação. Esta ferramenta desativa o agente (Aline) e envia automaticamente um resumo da conversa para a equipe da clínica. Nos links wa.me/ use o {{ $('Dados1').item.json.NumeroWhatsapp }}",
+        "workflowId": {
+          "__rl": true,
+          "value": "ALP07Xc8rccogOiP",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/ALP07Xc8rccogOiP",
+          "cachedResultName": "Resumo Para Humano"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "TempoInatividadeAgente": "={{ $('Parametros Fluxo1').item.json.TempoInatividadeAgente }}",
+            "WhatsAppHumano": "={{ $('Parametros Fluxo1').item.json.WhatsAppHumano }}",
+            "IdConversa": "={{ $('Dados Lead1').item.json.IdConversa }}",
+            "NomedoLead": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('NomedoLead', `Nome Completo do Lead`, 'string') }}",
+            "NumerodeWhatsapp": "={{ $('Dados1').item.json.NumeroWhatsapp }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "IdConversa",
+              "displayName": "IdConversa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "TempoInatividadeAgente",
+              "displayName": "TempoInatividadeAgente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "WhatsAppHumano",
+              "displayName": "WhatsAppHumano",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "NomedoLead",
+              "displayName": "NomedoLead",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "NumerodeWhatsapp",
+              "displayName": "NumerodeWhatsapp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        -1136,
+        1520
+      ],
+      "id": "5c2c2f67-16b7-42c1-b921-ccfc9a1059db",
+      "name": "Transferir_Para_humano_e_Resumir"
+    },
+    {
+      "parameters": {
+        "content": "## Variáveis do Fluxo\nCentral de controle do workflow",
+        "height": 540,
+        "width": 340,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -9872,
+        752
+      ],
+      "id": "f9544769-d584-4a98-aa0e-94d57860942b",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "content": "## Dados do Lead\nInformações principais sobre o lead",
+        "height": 540,
+        "width": 340,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -9488,
+        768
+      ],
+      "id": "0dc473aa-d66e-401c-8221-b413fb699959",
+      "name": "Sticky Note10"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9f488c5c-0b3b-48e9-87b1-5a22d513d1ec",
+              "name": "IdConversa",
+              "value": "={{ \n  (() => {\n    const key = $('Webhook').item.json.body.data.key || {};\n    const jid = key.remoteJid || '';\n    const jidAlt = key.remoteJidAlt || '';\n\n    // 1) Preferir sempre o que tiver \"@s.whatsapp.net\" (número real)\n    let chosen = '';\n    if (jidAlt && jidAlt.includes('@s.whatsapp.net')) {\n      chosen = jidAlt;\n    } else if (jid && jid.includes('@s.whatsapp.net')) {\n      chosen = jid;\n    } else {\n      // fallback: o que existir\n      chosen = jidAlt || jid || '';\n    }\n\n    // 2) Tirar sufixo e possível \":device\"\n    return chosen\n      .replace('@s.whatsapp.net', '')\n      .split(':')[0];\n  })()\n}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "99f9e4fa-555d-41c9-8b95-6bb231fc7631",
+      "name": "Dados Lead1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -9376,
+        1008
+      ],
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "content": "Ajuste o Node Set com os campos relevantes fornecidos.\n",
+        "height": 280,
+        "width": 210,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -9424,
+        896
+      ],
+      "id": "b2d651ff-c466-4b14-aa4b-2ec43576d98a",
+      "name": "Sticky Note11"
+    },
+    {
+      "parameters": {
+        "content": "Ajuste tempos de buffer e inatividade do agente conforme necessidade.\n",
+        "height": 280,
+        "width": 190,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -9808,
+        880
+      ],
+      "id": "07f35bf9-31ba-4171-94d1-e784ff53eb84",
+      "name": "Sticky Note19"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3bdce7b6-d0f1-442c-aafd-8cd123aa21b6",
+              "name": "EsperaBuffer",
+              "value": 1,
+              "type": "number"
+            },
+            {
+              "id": "c38e8985-4494-40a4-878e-f25467849842",
+              "name": "TempoInatividadeAgente",
+              "value": 900,
+              "type": "number"
+            },
+            {
+              "id": "ac619a5e-1438-4e19-aaf5-21dfcbc32312",
+              "name": "ModeloTemperatura",
+              "value": 0.4,
+              "type": "number"
+            },
+            {
+              "id": "ddab11f2-87e0-4356-93be-2ac1b27cf36a",
+              "name": "WhatsAppHumano",
+              "value": "5524981787272",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -9776,
+        992
+      ],
+      "id": "61b502ed-1492-4e8e-8063-15b9b81f3e68",
+      "name": "Parametros Fluxo1",
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{ $('Dados Lead1').item.json.IdConversa }}_status",
+        "value": "Desativado"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -8160,
+        688
+      ],
+      "id": "5ec6fbef-ab26-488c-9092-ad96af447e76",
+      "name": "DesativaAgente1",
+      "credentials": {
+        "redis": {
+          "id": "U2Rnu3cWNQK2yplq",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Dados Lead1').item.json.IdConversa }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        -7968,
+        864
+      ],
+      "id": "05a34a9b-38be-43f5-afe4-0436d67ef346",
+      "name": "Postgres Chat Memory4",
+      "credentials": {
+        "postgres": {
+          "id": "ALtjgR9Lu4dL96wr",
+          "name": "Postgres supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "messages": {
+          "messageValues": [
+            {
+              "type": "user",
+              "message": "={{ $('Dados1').item.json.conversation }}"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryManager",
+      "typeVersion": 1.1,
+      "position": [
+        -7600,
+        896
+      ],
+      "id": "c66b98e4-9ed6-4447-b442-22f187583ef2",
+      "name": "Chat Memory Manager3"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Dados Lead1').item.json.IdConversa }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        -7600,
+        1072
+      ],
+      "id": "5139baea-d049-4bd9-9b8b-5bc69eeba1a5",
+      "name": "Postgres Chat Memory5",
+      "credentials": {
+        "postgres": {
+          "id": "ALtjgR9Lu4dL96wr",
+          "name": "Postgres supabase"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -7248,
+        896
+      ],
+      "id": "afae4389-87c4-4a76-8261-1e8d0333b093",
+      "name": "No Operation, do nothing4",
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -7680,
+        688
+      ],
+      "id": "756e14f6-13c1-4880-bb51-9cd2b3006f6d",
+      "name": "No Operation, do nothing5"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "={{ $('Dados1').item.json.conversation }}"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryManager",
+      "typeVersion": 1.1,
+      "position": [
+        -7968,
+        688
+      ],
+      "id": "dc38146c-a058-4192-9985-92ef56744b90",
+      "name": "Chat Memory Manager4"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "756ab323-31a2-4a59-92e8-c2c695027962",
+              "leftValue": "={{ $json.AgenteStatus }}",
+              "rightValue": "Desativado",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -7792,
+        1328
+      ],
+      "id": "8e0ff4a8-8bb3-4190-8405-2587f23c034c",
+      "name": "Bot Desativado?1",
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "756ab323-31a2-4a59-92e8-c2c695027962",
+              "leftValue": "={{ $('Dados1').item.json.fromMe }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -8592,
+        848
+      ],
+      "id": "30d3ab7f-c34a-4bb6-8d39-6544c9448046",
+      "name": "É intervençao humana?",
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "AgenteStatus",
+        "key": "={{ $('Dados Lead1').item.json.IdConversa }}_status",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -7952,
+        1328
+      ],
+      "id": "9afbe06a-8117-4dd9-8fb6-bbcb8fa0d5a7",
+      "name": "Redis5",
+      "retryOnFail": false,
+      "credentials": {
+        "redis": {
+          "id": "U2Rnu3cWNQK2yplq",
+          "name": "Redis account"
+        }
+      },
+      "notes": "TEMPLATE DESENVOLVIDO POR NOCODE STARTUP\nhttps://nocodestartup.io/\n\nFORMAÇÃO GESTOR DE AGENTES DE IA:\nhttps://nocodestartup.io/formacao-gestor-agentes-ia/"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "5370ea01-8939-47d2-872d-2e59c6b29e99",
+              "leftValue": "={{ $('Dados1').item.json['Emoji(Desativação)'] }}",
+              "rightValue": "✅",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "8b5f11f6-a8be-418a-bf15-2c25afb78a04",
+              "leftValue": "={{ $('Webhook').item.json.body.data.key.fromMe }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -8480,
+        496
+      ],
+      "id": "88732a22-f65e-4bf1-9e56-104f92b58729",
+      "name": "If3"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "AgenteStatus",
+        "key": "={{ $('Dados Lead1').item.json.IdConversa }}_status",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -8176,
+        288
+      ],
+      "id": "37066bf1-3897-4386-912f-1cdc0cb699db",
+      "name": "Redis6",
+      "credentials": {
+        "redis": {
+          "id": "U2Rnu3cWNQK2yplq",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{ $('Dados Lead1').item.json.IdConversa }}_status",
+        "value": "Ativado"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -7968,
+        288
+      ],
+      "id": "d7514f2d-0af2-4085-a8f6-745e3ee73d86",
+      "name": "Redis7",
+      "credentials": {
+        "redis": {
+          "id": "U2Rnu3cWNQK2yplq",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "832f2aa5-07b4-4999-889c-c3464899c258",
+              "name": "event",
+              "value": "={{ $json.body.event }}",
+              "type": "string"
+            },
+            {
+              "id": "aba4bbcf-f50c-45ab-b559-732788b90bd5",
+              "name": "instance",
+              "value": "={{ $json.body.instance }}",
+              "type": "string"
+            },
+            {
+              "id": "36b0fc04-a3a0-4818-b20a-d7b134fd81ba",
+              "name": "remoteJid",
+              "value": "={{ $json.body.data.key.remoteJid }}",
+              "type": "string"
+            },
+            {
+              "id": "2d1ab326-a5f1-4fff-b9c4-414760a8c265",
+              "name": "fromMe",
+              "value": "={{ $json.body.data.key.fromMe }}",
+              "type": "string"
+            },
+            {
+              "id": "e5fbe075-16ea-4939-bfaa-3ee9e171529a",
+              "name": "pushName",
+              "value": "={{ $json.body.data.pushName }}",
+              "type": "string"
+            },
+            {
+              "id": "7fc36135-0c0e-47bd-bbf3-81a0fdbe9dc8",
+              "name": "conversation",
+              "value": "={{ $json.body.data.message.conversation }}",
+              "type": "string"
+            },
+            {
+              "id": "77ed884f-3774-4167-8f00-77c97e77562f",
+              "name": "messageType",
+              "value": "={{ $json.body.data.messageType }}",
+              "type": "string"
+            },
+            {
+              "id": "43e7d6a1-b60a-4344-9e26-c5a28a25b1b8",
+              "name": "timestamp",
+              "value": "={{ $json.body.data.messageTimestamp }}",
+              "type": "string"
+            },
+            {
+              "id": "4a371c74-dc37-4425-b7ce-1c0c83e216be",
+              "name": "idMensagem",
+              "value": "={{ $json.body.data.key.id }}",
+              "type": "string"
+            },
+            {
+              "id": "2870cbee-abf9-4ac0-b151-05a9db20a9ab",
+              "name": "Emoji(Desativação)",
+              "value": "={{ $json.body.data.message.reactionMessage.text }}",
+              "type": "string"
+            },
+            {
+              "id": "376ee2a5-ce68-4d52-ac03-96e0c1dcd182",
+              "name": "FromMe(Emoji)",
+              "value": "={{ $json.body.data.message.reactionMessage.key.fromMe }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -10016,
+        992
+      ],
+      "id": "8a002c26-22ee-42c0-887b-add2cfbbc2cb",
+      "name": "Dados1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -9488,
+        2080
+      ],
+      "id": "b346576b-a0f8-4fd9-bfed-dd5acee68737",
+      "name": "When clicking ‘Execute workflow’"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n-gustavo-n8n.vavxdh.easypanel.host",
+            "user-agent": "axios/1.12.2",
+            "content-length": "1373",
+            "accept": "application/json, text/plain, */*",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "content-type": "application/json",
+            "x-forwarded-for": "172.18.0.1",
+            "x-forwarded-host": "n8n-gustavo-n8n.vavxdh.easypanel.host",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "b7ddd822fe3a",
+            "x-real-ip": "172.18.0.1"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "event": "messages.upsert",
+            "instance": "Virginia",
+            "data": {
+              "key": {
+                "remoteJid": "42146698637548@lid",
+                "remoteJidAlt": "5524999991916@s.whatsapp.net",
+                "fromMe": false,
+                "id": "AC1C55593FFB1759DEDAC097F0726CA1",
+                "participant": "",
+                "addressingMode": "lid"
+              },
+              "pushName": "Guilherme Rampaso",
+              "status": "DELIVERY_ACK",
+              "message": {
+                "conversation": "28/12/2003",
+                "messageContextInfo": {
+                  "deviceListMetadata": {
+                    "senderKeyIndexes": [],
+                    "recipientKeyIndexes": [],
+                    "senderTimestamp": {
+                      "low": 1764257039,
+                      "high": 0,
+                      "unsigned": true
+                    },
+                    "recipientKeyHash": {
+                      "0": 7,
+                      "1": 139,
+                      "2": 65,
+                      "3": 244,
+                      "4": 123,
+                      "5": 160,
+                      "6": 31,
+                      "7": 248,
+                      "8": 2,
+                      "9": 160
+                    },
+                    "recipientTimestamp": {
+                      "low": 1764251307,
+                      "high": 0,
+                      "unsigned": true
+                    }
+                  },
+                  "deviceListMetadataVersion": 2,
+                  "messageSecret": {
+                    "0": 100,
+                    "1": 236,
+                    "2": 26,
+                    "3": 197,
+                    "4": 2,
+                    "5": 188,
+                    "6": 84,
+                    "7": 72,
+                    "8": 27,
+                    "9": 207,
+                    "10": 246,
+                    "11": 104,
+                    "12": 37,
+                    "13": 84,
+                    "14": 77,
+                    "15": 193,
+                    "16": 67,
+                    "17": 164,
+                    "18": 28,
+                    "19": 114,
+                    "20": 231,
+                    "21": 168,
+                    "22": 135,
+                    "23": 93,
+                    "24": 233,
+                    "25": 46,
+                    "26": 71,
+                    "27": 219,
+                    "28": 229,
+                    "29": 232,
+                    "30": 98,
+                    "31": 255
+                  }
+                }
+              },
+              "messageType": "conversation",
+              "messageTimestamp": 1764615824,
+              "instanceId": "f30f5237-4766-497c-b1e6-c85ac53845b5",
+              "source": "android"
+            },
+            "destination": "https://n8n-gustavo-n8n.vavxdh.easypanel.host/webhook/evolution-virginia",
+            "date_time": "2025-12-01T16:03:45.001Z",
+            "sender": "553188558000@s.whatsapp.net",
+            "server_url": "https://virginia-evolution-api.vavxdh.easypanel.host",
+            "apikey": "0328B02843FF-4BED-9360-AEA6CB20EC8C"
+          },
+          "webhookUrl": "https://n8n-gustavo-n8n.vavxdh.easypanel.host/webhook/evolution-virginia",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "Mensagem de Texto",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get base 64",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Base 64 imagem",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Obter m dia em base64",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mensagem Texto2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Add Error Buffer1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "Buffer 3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ComparandoMensagens1": {
+      "main": [
+        [
+          {
+            "node": "Apagar Buffer1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mensagem1": {
+      "main": [
+        [
+          {
+            "node": "Encontrar Cliente1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Encontrar Cliente1": {
+      "main": [
+        [
+          {
+            "node": "Cliente Existe?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cliente Existe?1": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Criar Cliente1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Criar Cliente1": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buffer 3": {
+      "main": [
+        [
+          {
+            "node": "ComparandoMensagens1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Texto Buffer1": {
+      "main": [
+        [
+          {
+            "node": "Buffer  2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apagar Buffer1": {
+      "main": [
+        [
+          {
+            "node": "Mensagem1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Audio Buffer1": {
+      "main": [
+        [
+          {
+            "node": "Buffer  2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Error Buffer1": {
+      "main": [
+        [
+          {
+            "node": "Buffer  2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add PDF Buffer1": {
+      "main": [
+        [
+          {
+            "node": "Buffer  2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Imagem Buffer1": {
+      "main": [
+        [
+          {
+            "node": "Buffer  2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Auto-fixing Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Auto-fixing Output Parser1",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser [Schema]": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Auto-fixing Output Parser1",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Código Para Splitar e Enviar Todas as Mensagen do Agente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar texto1": {
+      "main": [
+        []
+      ]
+    },
+    "Mensagem de Texto": {
+      "main": [
+        [
+          {
+            "node": "Add Texto Buffer1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get base 64": {
+      "main": [
+        [
+          {
+            "node": "Aúdio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aúdio": {
+      "main": [
+        [
+          {
+            "node": "Transcrever",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcrever": {
+      "main": [
+        [
+          {
+            "node": "Mensagem em áudio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mensagem em áudio": {
+      "main": [
+        [
+          {
+            "node": "Add Audio Buffer1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Base 64 imagem": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Analyze image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze image": {
+      "main": [
+        [
+          {
+            "node": "Set Imagem Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Imagem Message": {
+      "main": [
+        [
+          {
+            "node": "Add Imagem Buffer1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obter m dia em base64": {
+      "main": [
+        [
+          {
+            "node": "Convert to File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File1": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mensagem Texto2": {
+      "main": [
+        [
+          {
+            "node": "Add Texto Buffer1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Add PDF Buffer1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Dados1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory3": {
+      "ai_memory": [
+        [
+          {
+            "node": "Chat Memory Manager",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tabela_De_Procedimentos": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buffer  2": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Código Para Splitar e Enviar Todas as Mensagen do Agente": {
+      "main": [
+        [
+          {
+            "node": "Enviar texto1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Foto Nano lips": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar foto design sobrancelhas": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "VerDisponibilidade": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "cancelar_evento": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "criar_evento": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "ConsultarAgendamentosParaPegarID": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Foto Areola": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transferir_Para_humano_e_Resumir": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dados Lead1": {
+      "main": [
+        [
+          {
+            "node": "É intervençao humana?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parametros Fluxo1": {
+      "main": [
+        [
+          {
+            "node": "Dados Lead1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DesativaAgente1": {
+      "main": [
+        [
+          {
+            "node": "Chat Memory Manager4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory4": {
+      "ai_memory": [
+        [
+          {
+            "node": "Chat Memory Manager4",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Memory Manager3": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory5": {
+      "ai_memory": [
+        [
+          {
+            "node": "Chat Memory Manager3",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Memory Manager4": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bot Desativado?1": {
+      "main": [
+        [
+          {
+            "node": "Chat Memory Manager3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "É intervençao humana?": {
+      "main": [
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Redis5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis5": {
+      "main": [
+        [
+          {
+            "node": "Bot Desativado?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "Redis6",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "DesativaAgente1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis6": {
+      "main": [
+        [
+          {
+            "node": "Redis7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dados1": {
+      "main": [
+        [
+          {
+            "node": "Parametros Fluxo1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Chat Memory Manager",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "022765bb-d154-4b1c-b263-2d2260c32acc",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a26c681d92abd97f10e0c5b4b6f7a66077f5fe9aa92096c5683e4a59b4b02ea6"
+  },
+  "id": "fGNOdYyv2gW998Iv",
+  "tags": []
+}
