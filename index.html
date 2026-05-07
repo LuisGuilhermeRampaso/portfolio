@@ -3,8 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Luis Guilherme — Desenvolvedor de Soluções. Portfólio de projetos web.">
+  <meta name="description" content="Luis Guilherme — Desenvolvedor de Soluções Full Stack. Portfólio com projetos reais em produção: SaaS, APIs, extensões Chrome e dashboards de dados.">
   <title>Luis Guilherme — Desenvolvedor de Soluções</title>
+  <meta property="og:title" content="Luis Guilherme — Desenvolvedor de Soluções">
+  <meta property="og:description" content="Projetos reais em produção — do SaaS de gestão de salões a dashboards de dados econômicos. Full Stack com React, Node.js, Python e mais.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="PlatinumImage.jpg">
+  <meta property="og:locale" content="pt_BR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Luis Guilherme — Desenvolvedor de Soluções">
+  <meta name="twitter:description" content="Portfólio com projetos reais em produção. Full Stack Developer.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -795,6 +803,13 @@
       #navbar { padding-left: 1.25rem; padding-right: 1.25rem; }
     }
 
+    /* ── Focus Styles ─────────────────────────────────────────── */
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
     /* ── Reduced Motion ───────────────────────────────────────── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -836,12 +851,12 @@
       </h1>
       <p class="hero-subtitle anim-fade-up d3">// Desenvolvedor de Soluções</p>
       <p class="hero-desc anim-fade-up d4">
-        Criando experiências digitais com código limpo, design cuidadoso e foco em resultados reais.
+        Do SaaS para salões de beleza ao dashboard de dados econômicos — construo produtos digitais reais, do zero ao deploy.
       </p>
       <div class="hero-actions anim-fade-up d5">
         <a href="#contact" class="btn btn-primary">Entre em Contato</a>
-        <a href="https://github.com/LuisGuilhermeRampaso" target="_blank" rel="noopener" class="btn btn-secondary">
-          GitHub <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:3px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        <a href="cv.pdf" download class="btn btn-secondary">
+          Baixar CV <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:3px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         </a>
       </div>
     </div>
@@ -866,7 +881,7 @@
           <div class="card-number">01</div>
 
           <div class="card-preview" style="background:#0d0d14;">
-            <img src="PlatinumImage.jpg" alt="Preview — Platinum Rocket"
+            <img src="PlatinumImage.jpg" alt="Preview — Platinum Rocket" loading="lazy"
               style="width:100%;height:auto;display:block;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
               class="card-preview-img" />
             <div class="card-img-fade"></div>
@@ -886,7 +901,6 @@
             </div>
             <div class="card-actions">
               <a href="https://platinumrocket.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Acessar Site <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:3px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
-              <a href="#" class="btn btn-outline btn-sm">GitHub</a>
             </div>
           </div>
         </article>
@@ -898,6 +912,7 @@
             <img
               src="bible-preview.png"
               alt="Preview da extensão Bíblia Online"
+              loading="lazy"
               style="width:100%;height:100%;object-fit:cover;object-position:center center;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
               class="card-preview-img"
             />
@@ -926,7 +941,7 @@
         <article class="project-card" data-reveal data-demo="https://calculadoraclt-amber.vercel.app/" data-github="https://github.com/LuisGuilhermeRampaso/calculadora-clt">
           <div class="card-number">03</div>
           <div class="card-preview" style="background:#0d0d14;">
-            <img src="CalculadoraCLT.jpg" alt="Preview — Calculadora CLT"
+            <img src="CalculadoraCLT.jpg" alt="Preview — Calculadora CLT" loading="lazy"
               style="width:100%;height:auto;display:block;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
               class="card-preview-img" />
             <div class="card-img-fade"></div>
@@ -954,7 +969,7 @@
         <article class="project-card" data-reveal data-demo="https://github.com/LuisGuilhermeRampaso/rest-api#endpoints" data-github="https://github.com/LuisGuilhermeRampaso/rest-api">
           <div class="card-number">04</div>
           <div class="card-preview" style="background:#0d0d14;">
-            <img src="ApiRest.jpg" alt="Preview — API REST Documentada"
+            <img src="ApiRest.jpg" alt="Preview — API REST Documentada" loading="lazy"
               style="width:100%;height:auto;display:block;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
               class="card-preview-img" />
             <div class="card-img-fade"></div>
@@ -1025,7 +1040,7 @@
         <article class="project-card" data-reveal data-demo="https://marianedinali.vercel.app/" data-github="#">
           <div class="card-number">06</div>
           <div class="card-preview" style="background:#f5f0eb;">
-            <img src="mariane-preview.jpg" alt="Preview — Landing Page Psicanalista"
+            <img src="mariane-preview.jpg" alt="Preview — Landing Page Psicanalista" loading="lazy"
               style="width:100%;height:auto;display:block;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
               class="card-preview-img" />
             <div class="card-img-fade"></div>
@@ -1068,13 +1083,13 @@
           <span class="section-tag">// sobre mim</span>
           <h2 class="section-title">Quem sou <span class="gradient-text">eu</span></h2>
           <p>
-            Sou o Luis Guilherme, Desenvolvedor de Soluções com foco em construir produtos digitais que
-            resolvem problemas reais. Trabalho em todo o ciclo — da arquitetura ao deploy — sempre
-            priorizando código limpo, performance e experiência do usuário.
+            Sou o Luis Guilherme, Desenvolvedor Full Stack com projetos reais em produção — de SaaS de gestão
+            para salões de beleza a extensões na Chrome Web Store. Trabalho em todo o ciclo: levantamento
+            de requisitos, arquitetura, desenvolvimento e deploy.
           </p>
           <p>
-            Apaixonado por tecnologia e aprendizado contínuo, gosto de explorar novas ferramentas e
-            abordagens para entregar soluções cada vez mais eficientes e escaláveis.
+            Tenho experiência prática com React, Node.js, Python e cloud. Busco oportunidades onde
+            posso construir produtos com impacto real, seja como freelancer ou integrando um time de produto.
           </p>
           <div class="about-info-grid">
             <div class="info-item">

@@ -3,8 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Luis Guilherme — Todos os projetos. Portfólio completo de desenvolvimento web, APIs, extensões e data.">
+  <meta name="description" content="Luis Guilherme — Todos os projetos. Portfólio completo de desenvolvimento web, APIs, extensões Chrome e data pipelines.">
   <title>Projetos — Luis Guilherme</title>
+  <meta property="og:title" content="Projetos — Luis Guilherme">
+  <meta property="og:description" content="Portfólio completo com 7 projetos em produção. SaaS, APIs, extensões Chrome, ferramentas e dashboards de dados.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="PlatinumImage.jpg">
+  <meta property="og:locale" content="pt_BR">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -338,6 +344,12 @@
       #navbar { padding-left: 1.25rem; padding-right: 1.25rem; }
     }
 
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
       [data-reveal] { opacity: 1; transform: none; }
@@ -380,7 +392,7 @@
           <span class="stat-label">// projetos</span>
         </div>
         <div class="stat-item">
-          <span class="stat-number gradient-text">5</span>
+          <span class="stat-number gradient-text">6</span>
           <span class="stat-label">// categorias</span>
         </div>
         <div class="stat-item">
@@ -415,7 +427,7 @@
         <div class="card-number">01</div>
         <div class="card-preview" style="background:#0d0d14;">
           <img src="PlatinumImage.jpg" alt="Preview — Platinum Rocket"
-            style="width:100%;height:auto;display:block;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
+            loading="lazy" style="width:100%;height:auto;display:block;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
             class="card-preview-img" />
           <div class="card-img-fade"></div>
         </div>
@@ -424,12 +436,12 @@
             <h3 class="card-title">Platinum Rocket</h3>
             <span class="card-status">Em Produção</span>
           </div>
-          <p class="card-desc">Sistema de gestão para salões de beleza — landing page de alta conversão com agenda, equipe e faturamento em um só lugar.</p>
+          <p class="card-desc">SaaS de gestão completa para salões de beleza e barbearias — agendamentos, clientes, financeiro e relatórios em tempo real.</p>
           <div class="card-tags">
             <span class="tag">React</span>
-            <span class="tag">Next.js</span>
+            <span class="tag">Supabase</span>
+            <span class="tag">n8n</span>
             <span class="tag">TypeScript</span>
-            <span class="tag">Tailwind</span>
           </div>
           <div class="card-actions">
             <a href="https://platinumrocket.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Acessar Site <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:3px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
@@ -442,7 +454,7 @@
         <div class="card-number">02</div>
         <div class="card-preview" style="background:#f5f0eb;">
           <img src="mariane-preview.jpg" alt="Preview — Landing Page Psicanalista"
-            style="width:100%;height:auto;display:block;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
+            loading="lazy" style="width:100%;height:auto;display:block;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
             class="card-preview-img" />
           <div class="card-img-fade"></div>
         </div>
@@ -469,7 +481,7 @@
         <div class="card-number">03</div>
         <div class="card-preview" style="background:#0d0d14;">
           <img src="CalculadoraCLT.jpg" alt="Preview — Calculadora CLT"
-            style="width:100%;height:auto;display:block;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
+            loading="lazy" style="width:100%;height:auto;display:block;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
             class="card-preview-img" />
           <div class="card-img-fade"></div>
         </div>
@@ -496,7 +508,7 @@
         <div class="card-number">04</div>
         <div class="card-preview" style="background:#0d0d14;">
           <img src="ApiRest.jpg" alt="Preview — API REST Documentada"
-            style="width:100%;height:auto;display:block;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
+            loading="lazy" style="width:100%;height:auto;display:block;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
             class="card-preview-img" />
           <div class="card-img-fade"></div>
         </div>
@@ -548,9 +560,10 @@
             <h3 class="card-title">Air Canvas</h3>
             <span class="card-status">Em Produção</span>
           </div>
-          <p class="card-desc">Desenhe no ar usando apenas as mãos pela câmera. Reconhecimento de gestos em tempo real com MediaPipe e Canvas API.</p>
+          <p class="card-desc">Desenhe no ar usando apenas as mãos — rastreamento de gestos em tempo real com MediaPipe, suporte a duas mãos, partículas e glow nos traços.</p>
           <div class="card-tags">
-            <span class="tag">Python</span>
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
             <span class="tag">MediaPipe</span>
             <span class="tag">Canvas API</span>
             <span class="tag">Tailwind</span>
@@ -576,11 +589,12 @@
             <h3 class="card-title">Bíblia Online</h3>
             <span class="card-status">Em Produção</span>
           </div>
-          <p class="card-desc">Extensão para Chrome com navegação por livros e capítulos, múltiplas versões e modo escuro.</p>
+          <p class="card-desc">Extensão para Chrome que permite ler a Bíblia Sagrada em português e inglês, com navegação rápida entre livros e capítulos.</p>
           <div class="card-tags">
-            <span class="tag">JavaScript</span>
-            <span class="tag">Chrome API</span>
-            <span class="tag">CSS</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Vite</span>
+            <span class="tag">Chrome MV3</span>
+            <span class="tag">Bible API</span>
           </div>
           <div class="card-actions">
             <a href="https://chromewebstore.google.com/detail/b%C3%ADblia-online/pbfabhcohemllmkacfbmkagdnjmhinhm?hl=pt-BR&utm_source=ext_sidebar" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Ver na Chrome Store <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:3px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
