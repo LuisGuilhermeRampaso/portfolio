@@ -724,7 +724,7 @@
     .contact-icon.email-icon     { background: rgba(236,72,153,0.12); }
     .contact-icon.whatsapp-icon  { background: rgba(37,211,102,0.12); }
 
-    .contact-info { flex: 1; }
+    .contact-info { flex: 1; min-width: 0; }
     .contact-label {
       display: block;
       font-size: 0.8rem;
@@ -736,6 +736,9 @@
       display: block;
       font-size: 0.95rem;
       font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .contact-arrow {
       color: var(--subtle);
@@ -779,6 +782,10 @@
       .contact-grid  { grid-template-columns: repeat(2, 1fr); }
       #projects, #about, #contact { padding: 5rem 0; }
       footer { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-card { padding: 1.25rem; }
     }
     @media (max-width: 640px) {
       .card-actions { flex-direction: column; }
